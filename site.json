@@ -6,10 +6,10 @@
   "license": "by-sa",
   "metadata": {
     "author": {
-      "image": "",
-      "name": null,
-      "email": null,
-      "socialLink": null
+      "image": "files/me.jpg",
+      "name": "Bryan Ollendyke",
+      "email": "bto108@psu.edu",
+      "socialLink": "https://x.com/btopro"
     },
     "site": {
       "name": "journey",
@@ -23,7 +23,7 @@
         "gaID": null
       },
       "created": 1744140453,
-      "updated": 1744141797,
+      "updated": 1744142412,
       "git": {
         "vendor": "github",
         "branch": "gh-pages"
