@@ -107,7 +107,8 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         }
         header {
           display: flex;
-          justify-content: space-between;
+          text-align: center;
+          justify-content: center;
           align-items: center;
           margin-bottom: var(--ddd-spacing-10);
           color: white;
@@ -134,6 +135,9 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         .odd {
           margin-right: 50%;
         }
+        .article-wrap {
+          padding: var(--ddd-spacing-10);
+        }
       `,
     ];
   }
@@ -153,17 +157,19 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         ${this._items.map((item, index) => {
         return html`
           <article class="${index % 2 === 0 ? "even" : "odd"}">
-            <h3>${item.title}</h3>
-            <p>${item.description}</p>
-            <simple-cta href="${item.slug}" label="${this.t.readMore}"></simple-cta>
-            <img src="${item.image}" alt="${item.title}" />
-            <site-active-title></site-active-title>
+            <div class="article-wrap">
+              <h3>${item.title}</h3>
+              <p>${item.description}</p>
+              <simple-cta href="${item.slug}" label="${this.t.readMore}"></simple-cta>
+            </div>
           </article>
-          </li>
         `;
         })}` : ``}
       
       <article>
+        ${this.location.route.name !== "home" ? html`
+        <site-active-title></site-active-title>
+        ` : ``}
         <!-- this block and names are required for HAX to edit the content of the page. contentcontainer, slot, and wrapping the slot. -->
         <div id="contentcontainer"><div id="slot">${this.location.route.name !== "home" ? html`<slot></slot>` : ``}</div></div>
       </article>
