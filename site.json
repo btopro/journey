@@ -94,13 +94,17 @@
       "slug": "page",
       "order": 1,
       "parent": null,
-      "title": "Page",
-      "description": "",
+      "title": "Research",
+      "description": "I've done some awesome research projects in my time here\n\n\n\n",
       "metadata": {
         "created": 1744142194,
-        "updated": 1744142194,
-        "images": [],
-        "videos": []
+        "updated": 1744143695,
+        "images": {},
+        "videos": {},
+        "published": true,
+        "hideInMenu": false,
+        "locked": false,
+        "readtime": 1
       }
     },
     {

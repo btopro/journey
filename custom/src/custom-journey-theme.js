@@ -5,6 +5,7 @@
 import { HAXCMSLitElementTheme, css, unsafeCSS, html, store, autorun, toJS } from "@haxtheweb/haxcms-elements/lib/core/HAXCMSLitElementTheme.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/active-item/site-active-title.js";
 import "@haxtheweb/simple-cta/simple-cta.js";
+import "@haxtheweb/simple-icon/lib/simple-icon-lite.js";
 /**
  * `CustomJourneyTheme`
  * `CustomJourneyTheme based on HAXCMS theming ecosystem`
@@ -79,13 +80,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         height: 100vh;
         content: "";
         border-left: 4px dashed var(--ddd-primary-2);
-        position: absolute;
+        position: fixed;
         top: 0;
         bottom: 0;
         left: 50%;
-        width: 4px;
         margin: 0 auto;
-        z-index: 0;
+        z-index: -1;
       }
       body.dark-mode {
         background-color: var(--my-theme-high-tone);
@@ -135,20 +135,49 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         article {
           display: block;
         }
+        simple-icon-lite.article {
+          width: var(--ddd-spacing-6);
+          height: var(--ddd-spacing-6);
+          position: absolute;
+          margin-top: 92px;
+          margin-left: -10px;
+          padding: 0;
+          color: var(--ddd-primary-2);
+        }
+        
         .even {
           margin-left: 50%;
         }
         .odd {
           margin-right: 50%;
+          text-align: right;
         }
         .article-wrap {
           padding: var(--ddd-spacing-10);
         }
         .article-wrap h3 {
-          font-size: var(--ddd-font-size-2xl);
+          font-size: var(--ddd-font-size-xl);
         }
         .article-wrap p {
-          font-size: var(--ddd-font-size-xs);
+          font-size: var(--ddd-font-size-3xs);
+          margin-left: var(--ddd-spacing-4);
+        }
+        .article-wrap simple-cta {
+          margin-top: var(--ddd-spacing-4);
+        }
+        main {
+          padding: var(--ddd-spacing-10);
+        }
+        footer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: var(--ddd-spacing-10);
+          background-color: var(--ddd-primary-2);
+          color: white;
+          height: var(--ddd-spacing-20);
+          width: 100%;
+          margin-top: var(--ddd-spacing-10);
         }
       `,
     ];
@@ -169,6 +198,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         ${this._items.map((item, index) => {
         return html`
           <article class="${index % 2 === 0 ? "even" : "odd"}">
+          <simple-icon-lite class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-lite>
             <div class="article-wrap">
               <h3>${item.title}</h3>
               <p>${item.description}</p>
