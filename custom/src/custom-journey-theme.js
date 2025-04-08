@@ -68,7 +68,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       ...super.HAXCMSGlobalStyleSheetContent(),
       css`
       :root {
-        --my-theme-low-tone: var(--ddd-theme-default-slateMaxLight);
+        --my-theme-low-tone: white;
         --my-theme-high-tone: var(--ddd-theme-default-coalyGray);
       }
       body {
@@ -79,7 +79,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       custom-journey-theme:before {
         height: 100vh;
         content: "";
-        border-left: 4px dashed var(--ddd-primary-2);
+        border-left: 4px dashed var(--ddd-primary-8);
         position: fixed;
         top: 0;
         bottom: 0;
@@ -109,39 +109,53 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           text-align: center;
           justify-content: center;
           align-items: center;
-          margin-bottom: var(--ddd-spacing-10);
           color: white;
           background-color: var(--ddd-primary-2);
           height: 50vh;
-          width: 100%;
           overflow: hidden;
           padding: var(--ddd-spacing-10);
           z-index: 1;
+        }
+        .lower-header-box {
+          background-color: var(--ddd-primary-8);
+          height: var(--ddd-spacing-10);
+          padding-bottom: var(--ddd-spacing-4);
+        }
+        .author a {
+          color: white;
+          text-decoration: none;
         }
         .author-image {
           border-radius: 50%;
           width: 150px;
           height: 150px;
           margin-right: var(--ddd-spacing-10);
+          border: 2px solid white;
         }
         header h1 {
           font-size: var(--ddd-font-size-4xl);
         }
 
         header h2 {
-          font-size: var(--ddd-font-size-3xl);
+          font-size: var(--ddd-font-size-xl);
         }
 
         article {
           display: block;
         }
-        simple-icon-lite.article {
+        simple-icon-lite {
           width: var(--ddd-spacing-6);
           height: var(--ddd-spacing-6);
+          padding: 0;
           position: absolute;
+        }
+        simple-icon-lite.top {
+          margin-top: var(--ddd-spacing-5);
+          left: calc(50% - 12px);
+        }
+        simple-icon-lite.article {
           margin-top: 92px;
           margin-left: -10px;
-          padding: 0;
           color: var(--ddd-primary-2);
         }
         
@@ -173,11 +187,18 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           justify-content: center;
           align-items: center;
           padding: var(--ddd-spacing-10);
-          background-color: var(--ddd-primary-2);
+          background-color: var(--ddd-primary-8);
           color: white;
-          height: var(--ddd-spacing-20);
-          width: 100%;
-          margin-top: var(--ddd-spacing-10);
+          height: var(--ddd-spacing-5);
+        }
+
+        .not-home {
+          background-color: var(--my-theme-low-tone);
+          padding: var(--ddd-spacing-30);
+        }
+        site-active-title h1 {
+          font-size: var(--ddd-font-size-4xl);
+          margin-top: 0;
         }
       `,
     ];
@@ -188,13 +209,15 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     <header>
       <div class="author">
         <a href="/">${this.manifest.metadata.author.image ? html`<img class="author-image" src="${this.manifest.metadata.author.image}" alt="${this.manifest.metadata.author.name}" />`: ``}
-        <h1>${this.manifest.name}</h1>
+        <h1>${this.manifest.title}</h1>
         <h2>${this.manifest.description}</h2>
         </a>
       </div>
     </header>
-    <main>
-      
+    <div class="lower-header-box">
+      <simple-icon-lite class="top" icon="${this.manifest.metadata.icon ? this.manifest.metadata.icon : "av:album"}"></simple-icon-lite>
+    </div>
+    <main class="main ${this.location.route.name === "home" ? "home" : "not-home"}">   
       ${this.location.route.name === "home" ? html`
         ${this._items.map((item, index) => {
         return html`
