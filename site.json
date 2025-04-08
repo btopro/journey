@@ -114,13 +114,17 @@
       "slug": "page-1",
       "order": 2,
       "parent": null,
-      "title": "Page",
-      "description": "",
+      "title": "Publications",
+      "description": "I am published in many different journals. Here are just a couple of my more recent works of awesomeness!\n",
       "metadata": {
         "created": 1744142197,
-        "updated": 1744142197,
-        "images": [],
-        "videos": []
+        "updated": 1744143775,
+        "images": {},
+        "videos": {},
+        "published": true,
+        "hideInMenu": false,
+        "locked": false,
+        "readtime": 1
       }
     },
     {
