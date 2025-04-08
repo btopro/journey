@@ -70,6 +70,22 @@
         "created": 1744140453,
         "updated": 1744140453
       }
+    },
+    {
+      "id": "item-b20298b9-5136-41e3-a492-106db4042e16",
+      "indent": 0,
+      "location": "pages/item-b20298b9-5136-41e3-a492-106db4042e16/index.html",
+      "slug": "page",
+      "order": 1,
+      "parent": null,
+      "title": "Page",
+      "description": "",
+      "metadata": {
+        "created": 1744142194,
+        "updated": 1744142194,
+        "images": [],
+        "videos": []
+      }
     }
   ]
 }

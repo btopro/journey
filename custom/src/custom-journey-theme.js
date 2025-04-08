@@ -77,6 +77,17 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         margin: var(--ddd-spacing-0);
         background-color: var(--my-theme-low-tone);
       }
+      custom-journey-theme:before {
+        height: 100vh;
+        content: "";
+        border-left: 4px dashed var(--ddd-primary-2);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        margin: 0 auto;
+      }
       body.dark-mode {
         background-color: var(--my-theme-high-tone);
       }
@@ -106,8 +117,22 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           overflow: hidden;
           padding: var(--ddd-spacing-10);
         }
-        header .author {
+        header site-title {
           font-size: var(--ddd-font-size-4xl);
+        }
+
+        header h2 {
+          font-size: var(--ddd-font-size-3xl);
+        }
+
+        article {
+          display: block;
+        }
+        .even {
+          margin-left: 50%;
+        }
+        .odd {
+          margin-right: 50%;
         }
       `,
     ];
@@ -119,16 +144,21 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       <div class="author">
         <img src="${this.manifest.metadata.author.image}" alt="${this.manifest.metadata.author.name}" />
         <site-title></site-title>
+        <h2>${this.manifest.description}</h2>
       </div>
     </header>
     <main>
       
       ${this.location.route.name === "home" ? html`
         ${this._items.map((item, index) => {
-        console.log(item);
         return html`
-          <li class="${item.id === this.activeId ? "active" : ""}">
-            <a href="${item.slug}"><button title="${item.title}">${(index+1)}</button></a>
+          <article class="${index % 2 === 0 ? "even" : "odd"}">
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <simple-cta href="${item.slug}" label="${this.t.readMore}"></simple-cta>
+            <img src="${item.image}" alt="${item.title}" />
+            <site-active-title></site-active-title>
+          </article>
           </li>
         `;
         })}` : ``}
