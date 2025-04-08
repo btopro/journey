@@ -3,8 +3,6 @@
  * @license Apache-2.0, see License.md for full text.
  */
 import { HAXCMSLitElementTheme, css, unsafeCSS, html, store, autorun, toJS } from "@haxtheweb/haxcms-elements/lib/core/HAXCMSLitElementTheme.js";
-import "@haxtheweb/haxcms-elements/lib/ui-components/navigation/site-menu-button.js";
-import "@haxtheweb/haxcms-elements/lib/ui-components/site/site-title.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/active-item/site-active-title.js";
 import "@haxtheweb/simple-cta/simple-cta.js";
 /**
@@ -87,6 +85,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         left: 50%;
         width: 4px;
         margin: 0 auto;
+        z-index: 0;
       }
       body.dark-mode {
         background-color: var(--my-theme-high-tone);
@@ -117,8 +116,15 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           width: 100%;
           overflow: hidden;
           padding: var(--ddd-spacing-10);
+          z-index: 1;
         }
-        header site-title {
+        .author-image {
+          border-radius: 50%;
+          width: 150px;
+          height: 150px;
+          margin-right: var(--ddd-spacing-10);
+        }
+        header h1 {
           font-size: var(--ddd-font-size-4xl);
         }
 
@@ -138,6 +144,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         .article-wrap {
           padding: var(--ddd-spacing-10);
         }
+        .article-wrap h3 {
+          font-size: var(--ddd-font-size-2xl);
+        }
+        .article-wrap p {
+          font-size: var(--ddd-font-size-xs);
+        }
       `,
     ];
   }
@@ -146,8 +158,8 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     return html`
     <header>
       <div class="author">
-        <img src="${this.manifest.metadata.author.image}" alt="${this.manifest.metadata.author.name}" />
-        <site-title></site-title>
+        ${this.manifest.metadata.author.image ? html`<img class="author-image" src="${this.manifest.metadata.author.image}" alt="${this.manifest.metadata.author.name}" />`: ``}
+        <h1>${this.manifest.name}</h1>
         <h2>${this.manifest.description}</h2>
       </div>
     </header>
@@ -160,7 +172,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
             <div class="article-wrap">
               <h3>${item.title}</h3>
               <p>${item.description}</p>
-              <simple-cta href="${item.slug}" label="${this.t.readMore}"></simple-cta>
+              <simple-cta link="${item.slug}" label="${this.t.readMore}"></simple-cta>
             </div>
           </article>
         `;
