@@ -6,7 +6,7 @@ import { HAXCMSLitElementTheme, css, unsafeCSS, html, store, autorun, toJS } fro
 import "@haxtheweb/haxcms-elements/lib/ui-components/navigation/site-menu-button.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/site/site-title.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/active-item/site-active-title.js";
-
+import "@haxtheweb/simple-cta/simple-cta.js";
 /**
  * `CustomJourneyTheme`
  * `CustomJourneyTheme based on HAXCMS theming ecosystem`
@@ -37,8 +37,15 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     super();
     this._items = [];
     this.activeId = null;
+    this.location = null;
+    this.manifest = {};
+    this.t = {
+      readMore: "Read more",
+    };
     autorun(() => {
+      this.manifest = toJS(store.manifest);
       this.activeId = toJS(store.activeId);
+      this.location = toJS(store.location);
       this._items = toJS(store.manifest.items);
     });
   }
@@ -48,6 +55,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     return {
       ...super.properties,
       activeId: { type: String },
+      location: { type: String },
       _items: { type: Array },
     };
   }
@@ -83,60 +91,23 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       css`
         :host {
           display: block;
-          padding: var(--ddd-spacing-10) var(--ddd-spacing-20);
-          max-width: 960px;
-          min-width: 400px;
-          margin: var(--ddd-spacing-0) auto;
-          border: var(--ddd-border-lg);
-          border-width: var(--ddd-spacing-5);
-          border-radius: var(--ddd-radius-lg);
-          background-color: light-dark(var(--my-theme-low-tone), var(--my-theme-high-tone));
-          color: light-dark(var(--my-theme-high-tone), var(--my-theme-low-tone));
+          padding: var(--ddd-spacing-0);
+          margin: var(--ddd-spacing-0);
         }
-        .wrapper {
-          border-radius: var(--ddd-radius-lg);
-        }
-
-        site-title {
-          font-size: var(--ddd-font-size-l);
-        }
-
         header {
           display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: var(--ddd-spacing-10);
+          color: white;
+          background-color: var(--ddd-primary-2);
+          height: 50vh;
+          width: 100%;
+          overflow: hidden;
+          padding: var(--ddd-spacing-10);
         }
-        ul {
-          margin: var(--ddd-spacing-0);
-          padding: var(--ddd-spacing-0);
-        }
-        ul li {
-          display: inline-block;
-          margin: var(--ddd-spacing-0);
-          padding: var(--ddd-spacing-0);
-          list-style-type: none;
-          vertical-align: top;
-        }
-        ul li a {
-          display: block;
-        }
-
-        button {
-          height: var(--ddd-spacing-8);
-          width: var(--ddd-spacing-8);
-          margin: var(--ddd-spacing-0);
-          padding: 0;
-          font-size: var(--ddd-font-size-sm);
-          cursor: pointer;
-        }
-
-        .active button {
-          background-color: light-dark(var(--my-theme-low-tone), var(--my-theme-high-tone));
-          color: light-dark(var(--my-theme-high-tone), var(--my-theme-low-tone));
-          font-weight: bold;
-        }
-
-        site-menu-button {
-          display: inline-block;
-          vertical-align: top;
+        header .author {
+          font-size: var(--ddd-font-size-4xl);
         }
       `,
     ];
@@ -144,42 +115,32 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
 
   render() {
     return html`
-    <div class="wrapper">
     <header>
-      <ul>
-        <li>
-          <site-menu-button
-            type="prev"
-            position="top"
-          ></site-menu-button>
-        </li>
-    ${this._items.map((item, index) => {
-      return html`
-        <li class="${item.id === this.activeId ? "active" : ""}">
-          <a href="${item.slug}"><button title="${item.title}">${(index+1)}</button></a>
-        </li>
-      `;
-    }
-    )}
-        <li>
-          <site-menu-button
-            type="next"
-            position="top"
-          ></site-menu-button>
-        </li>
-      </ul>
+      <div class="author">
+        <img src="${this.manifest.metadata.author.image}" alt="${this.manifest.metadata.author.name}" />
+        <site-title></site-title>
+      </div>
     </header>
     <main>
-      <site-active-title></site-active-title>
+      
+      ${this.location.route.name === "home" ? html`
+        ${this._items.map((item, index) => {
+        console.log(item);
+        return html`
+          <li class="${item.id === this.activeId ? "active" : ""}">
+            <a href="${item.slug}"><button title="${item.title}">${(index+1)}</button></a>
+          </li>
+        `;
+        })}` : ``}
+      
       <article>
         <!-- this block and names are required for HAX to edit the content of the page. contentcontainer, slot, and wrapping the slot. -->
-        <div id="contentcontainer"><div id="slot"><slot></slot></div></div>
+        <div id="contentcontainer"><div id="slot">${this.location.route.name !== "home" ? html`<slot></slot>` : ``}</div></div>
       </article>
     </main>
     <footer>
       <slot name="footer"></slot>
     </footer>
-  </div>
     `;
   }
 
