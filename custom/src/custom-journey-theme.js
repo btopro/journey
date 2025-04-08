@@ -187,9 +187,10 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     return html`
     <header>
       <div class="author">
-        ${this.manifest.metadata.author.image ? html`<img class="author-image" src="${this.manifest.metadata.author.image}" alt="${this.manifest.metadata.author.name}" />`: ``}
+        <a href="/">${this.manifest.metadata.author.image ? html`<img class="author-image" src="${this.manifest.metadata.author.image}" alt="${this.manifest.metadata.author.name}" />`: ``}
         <h1>${this.manifest.name}</h1>
         <h2>${this.manifest.description}</h2>
+        </a>
       </div>
     </header>
     <main>
