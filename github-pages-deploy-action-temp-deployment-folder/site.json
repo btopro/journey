@@ -1,29 +1,51 @@
 {
   "id": "ea76c4af-662e-4929-9904-f4f892c7e89c",
-  "title": "journey",
+  "title": "Bryan Ollendyke",
   "author": "",
-  "description": "own course",
+  "description": "A life in hax-tivism",
   "license": "by-sa",
   "metadata": {
-    "author": {},
+    "author": {
+      "image": "files/me.jpg",
+      "name": "Bryan Ollendyke",
+      "email": "bto108@psu.edu",
+      "socialLink": "https://x.com/btopro"
+    },
     "site": {
       "name": "journey",
       "logo": "assets/banner.jpg",
       "settings": {
         "lang": "en-US",
-        "publishPagesOn": true
+        "publishPagesOn": true,
+        "pathauto": false,
+        "sw": false,
+        "forceUpgrade": false,
+        "gaID": null
       },
       "created": 1744140453,
-      "updated": 1744140453,
+      "updated": 1744142412,
       "git": {
         "vendor": "github",
         "branch": "gh-pages"
-      }
+      },
+      "version": "10.0.2",
+      "domain": null,
+      "tags": null,
+      "static": {}
     },
     "theme": {
       "element": "custom-journey-theme",
       "path": "./custom/build/custom.es6.js",
-      "name": "CustomJourneyTheme"
+      "name": "CustomJourneyTheme",
+      "variables": {
+        "image": "",
+        "imageAlt": null,
+        "imageLink": null,
+        "hexCode": null,
+        "cssVariable": "--simple-colors-default-theme-null-7",
+        "icon": null
+      },
+      "regions": {}
     },
     "node": {
       "fields": {}
@@ -42,11 +64,83 @@
       "slug": "welcome",
       "order": 0,
       "parent": null,
-      "title": "Welcome to journey",
-      "description": "",
+      "title": "About",
+      "description": "The man, the myth, the legend. I have been called many things, none of them those words. But let's find out more about the guy",
       "metadata": {
         "created": 1744140453,
-        "updated": 1744140453
+        "updated": 1744143744,
+        "files": [
+          {
+            "path": "/home/bto108a/Documents/git/btopro/journey/files/me.jpg",
+            "fullUrl": "//home/bto108a/Documents/git/btopro/journey/files/me.jpg",
+            "url": "files/me.jpg",
+            "type": "image/jpeg",
+            "name": "me.jpg",
+            "size": 41756
+          }
+        ],
+        "published": true,
+        "hideInMenu": false,
+        "locked": false,
+        "readtime": 1,
+        "videos": {},
+        "images": {}
+      }
+    },
+    {
+      "id": "item-b20298b9-5136-41e3-a492-106db4042e16",
+      "indent": 0,
+      "location": "pages/item-b20298b9-5136-41e3-a492-106db4042e16/index.html",
+      "slug": "page",
+      "order": 1,
+      "parent": null,
+      "title": "Research",
+      "description": "I've done some awesome research projects in my time here\n\n\n\n",
+      "metadata": {
+        "created": 1744142194,
+        "updated": 1744143702,
+        "images": {},
+        "videos": {},
+        "published": true,
+        "hideInMenu": false,
+        "locked": false,
+        "readtime": 1
+      }
+    },
+    {
+      "id": "item-b2ce7062-61d0-4ed9-8802-44351f9cdd80",
+      "indent": 0,
+      "location": "pages/item-b2ce7062-61d0-4ed9-8802-44351f9cdd80/index.html",
+      "slug": "page-1",
+      "order": 2,
+      "parent": null,
+      "title": "Publications",
+      "description": "I am published in many different journals. Here are just a couple of my more recent works of awesomeness!\n",
+      "metadata": {
+        "created": 1744142197,
+        "updated": 1744143775,
+        "images": {},
+        "videos": {},
+        "published": true,
+        "hideInMenu": false,
+        "locked": false,
+        "readtime": 1
+      }
+    },
+    {
+      "id": "item-c08eb346-788f-4ac9-b7f7-d769a8fb4814",
+      "indent": 0,
+      "location": "pages/item-c08eb346-788f-4ac9-b7f7-d769a8fb4814/index.html",
+      "slug": "page-2",
+      "order": 3,
+      "parent": null,
+      "title": "Page",
+      "description": "",
+      "metadata": {
+        "created": 1744142198,
+        "updated": 1744142198,
+        "images": [],
+        "videos": []
       }
     }
   ]
