@@ -5,7 +5,9 @@
 import { HAXCMSLitElementTheme, css, unsafeCSS, html, store, autorun, toJS } from "@haxtheweb/haxcms-elements/lib/core/HAXCMSLitElementTheme.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/active-item/site-active-title.js";
 import "@haxtheweb/simple-cta/simple-cta.js";
-import "@haxtheweb/simple-icon/lib/simple-icon-lite.js";
+import "@haxtheweb/simple-tooltip/simple-tooltip.js";
+import "@haxtheweb/simple-icon/lib/simple-icon-button-lite.js";
+import "@haxtheweb/scroll-button/scroll-button.js";
 /**
  * `CustomJourneyTheme`
  * `CustomJourneyTheme based on HAXCMS theming ecosystem`
@@ -37,10 +39,18 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     this._items = [];
     this.activeId = null;
     this.location = null;
+    this.basePath = null;
     this.manifest = {};
     this.t = {
       readMore: "Read more",
+      home: "Home",
     };
+    try {
+      this.basePath = globalThis.document.querySelector('base').href;
+    }
+    catch (e) {
+      this.basePath = globalThis.location.origin;
+    }
     autorun(() => {
       this.manifest = toJS(store.manifest);
       this.activeId = toJS(store.activeId);
@@ -55,6 +65,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       ...super.properties,
       activeId: { type: String },
       location: { type: String },
+      basePath: { type: String },
       _items: { type: Array },
     };
   }
@@ -86,6 +97,11 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         left: 50%;
         margin: 0 auto;
         z-index: -1;
+      }
+      @media (max-width: 800px) {
+        custom-journey-theme:before {
+          display: none;
+        }
       }
       body.dark-mode {
         background-color: var(--my-theme-high-tone);
@@ -125,8 +141,8 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         }
         .lower-header-box {
           background-color: var(--ddd-primary-8);
-          height: var(--ddd-spacing-10);
-          padding-bottom: var(--ddd-spacing-4);
+          height: var(--ddd-spacing-12);
+          padding: var(--ddd-spacing-6);
         }
         .author a {
           color: white;
@@ -134,10 +150,9 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         }
         .author-image {
           border-radius: 50%;
-          width: 150px;
-          height: 150px;
-          margin-right: var(--ddd-spacing-10);
-          border: 2px solid white;
+          width: 15vw;
+          height: 15vw;
+          border: 4px solid white;
         }
         header h1 {
           font-size: var(--ddd-font-size-4xl);
@@ -150,27 +165,61 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         article {
           display: block;
         }
-        simple-icon-lite {
-          width: var(--ddd-spacing-6);
-          height: var(--ddd-spacing-6);
+        .articles article {
+          display: flex;
+        }
+        simple-icon-button-lite {
+          --simple-icon-width: var(--ddd-spacing-12);
+          --simple-icon-height: var(--ddd-spacing-12);
           padding: 0;
+          border-radius: 50%;
+        }
+        simple-tooltip {
+          --simple-tooltip-font-size: var(--page-section-tooltip-font-size, var(--ddd-font-size-s, 16px));
+          --simple-tooltip-background: var(--page-section-tooltip-background, #000000);
+          --simple-tooltip-opacity: var(--page-section-tooltip-opacity, 0.8);
+          --simple-tooltip-text-color: var(--page-section-tooltip-text-color, white);
+          --simple-tooltip-delay-in: var(--page-section-tooltip-delay-in, 300);
+          --simple-tooltip-delay-out: var(--page-section-tooltip-delay-out, 0);
+          --simple-tooltip-duration-in: var(--page-section-tooltip-duration-in, 300);
+          --simple-tooltip-duration-out: var(--page-section-tooltip-duration-out, 0);
+        }
+        .top {
+          left: calc(50% - 22px);
           position: absolute;
         }
-        simple-icon-lite.top {
-          margin-top: var(--ddd-spacing-5);
-          left: calc(50% - 12px);
-        }
-        simple-icon-lite.article {
-          margin-top: 92px;
-          margin-left: -10px;
+        .article-link-icon {
           color: var(--ddd-primary-2);
+        }
+        a {
+          display: block;
+        }
+        simple-icon-button-lite.article {
+          color: var(--ddd-primary-2);
+        }
+        simple-icon-button-lite::part(button) {
+          height: auto;
+          background-color: white;
+        }
+        .even .article-link-icon {
+          margin-left: -20px;          
+        }
+        .odd .article-link-icon {
+          margin-right: -28px;
         }
         
         .even {
           margin-left: 50%;
         }
+        .articles a.article-link-icon {
+          display: flex;
+          width: 48px;
+          vertical-align: middle;
+          align-content: flex-end;
+        }
         .odd {
           margin-right: 50%;
+          flex-direction: row-reverse;
           text-align: right;
         }
         .article-wrap {
@@ -178,9 +227,22 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         }
         .article-wrap h3 {
           font-size: var(--ddd-font-size-xl);
+          margin-top: 0;
         }
         .article-wrap p {
-          font-size: var(--ddd-font-size-3xs);
+          font-size: var(--ddd-font-size-m);
+          margin-left: var(--ddd-spacing-4);
+          min-width: 200px;
+          display: flex;
+          line-height: normal;
+          font-family: var(--ddd-font-secondary);
+        }
+        .odd .article-wrap p {
+          margin-right: var(--ddd-spacing-4);
+          justify-content: right;
+          min-height: var(--ddd-spacing-10);
+        }
+        .even .article-wrap p {
           margin-left: var(--ddd-spacing-4);
         }
         .article-wrap simple-cta {
@@ -210,6 +272,85 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           font-size: var(--ddd-font-size-4xl);
           margin-top: 0;
         }
+        main.home .articles article:last-of-type {
+          border-bottom: none;
+        }
+
+        #scolltop {
+          position: fixed;
+          right: 0px;
+          bottom: 125px;
+          z-index: 10000;
+          --simple-icon-width: 48px;
+          --simple-icon-height: 48px;
+          --simple-icon-button-border-radius: none;
+        }
+
+        @media (max-width: 800px) {
+          header {
+            height: unset;
+            padding: var(--ddd-spacing-5);
+          }
+          .lower-header-box {
+            padding: var(--ddd-spacing-2);
+          }
+          header h1 {
+            font-size: var(--ddd-font-size-xl);
+          }
+          header h2 {
+            font-size: var(--ddd-font-size-sm);
+          }
+          main {
+            padding: var(--ddd-spacing-0);
+          }
+          main.not-home {
+            padding: var(--ddd-spacing-5);
+          }
+          main.not-home article {
+            border-bottom: none;
+          }
+          article {
+            padding: var(--ddd-spacing-5);
+            font-size: var(--ddd-font-size-3xs);
+            border-bottom: 4px dashed var(--ddd-primary-8);
+          }
+          site-active-title h1 {
+            font-size: var(--ddd-font-size-xl);
+          }
+          .even {
+            margin-left: unset;
+          }
+          .odd {
+            margin-right: unset;
+            text-align: unset;
+          }
+          .odd .article-wrap p {
+            margin-right: 0;
+            margin-left: 0;
+            justify-content: unset;
+          }
+          .even .article-wrap p {
+            margin-right: 0;
+            margin-left: 0;
+          }
+          simple-icon-button-lite.article {
+            display: none;
+          }
+          .article-wrap simple-cta {
+            margin-top: var(--ddd-spacing-2);
+          }
+          .article-wrap {
+            padding: var(--ddd-spacing-5);
+          }
+          .even .article-wrap p {
+            margin-left: unset;
+          }
+          .article-wrap p {
+            min-width: unset;
+            max-width: unset;
+            font-size: var(--ddd-font-size-s);
+          }
+        } 
       `,
     ];
   }
@@ -218,30 +359,40 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     return html`
     <header>
       <div class="author">
-        <a href="/">${this.manifest.metadata.author.image ? html`<img class="author-image" src="${this.manifest.metadata.author.image}" alt="${this.manifest.metadata.author.name}" />`: ``}
-        <h1>${this.manifest.title}</h1>
-        <h2>${this.manifest.description}</h2>
+        <a href="${this.basePath}">${this.manifest.metadata.author.image ? html`
+          <img 
+            class="author-image" 
+            src="${this.manifest.metadata.author.image}"
+            alt="${this.manifest.metadata.author.name}"
+          />`: ``}
+          <h1>${this.manifest.title}</h1>
+          <h2>${this.manifest.description}</h2>
         </a>
       </div>
     </header>
     <div class="lower-header-box">
-      <simple-icon-lite class="top" icon="${this.manifest.metadata.icon ? this.manifest.metadata.icon : "av:album"}"></simple-icon-lite>
+      <simple-tooltip for="top" position="top">${this.t.home}</simple-tooltip>
+      <a href="${this.basePath}" id="top" class="top article-link-icon"><simple-icon-button-lite label="${this.t.home}" icon="${this.manifest.metadata.icon ? this.manifest.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
     </div>
-    <main class="main ${this.location.route.name === "home" ? "home" : "not-home"}">   
-      ${this.location.route.name === "home" ? html`
-        ${this._items.map((item, index) => {
-        return html`
-          <article class="${index % 2 === 0 ? "even" : "odd"}">
-          <simple-icon-lite class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-lite>
-            <div class="article-wrap">
-              <h3>${item.title}</h3>
-              <p>${item.description}</p>
-              <simple-cta link="${item.slug}" label="${this.t.readMore}"></simple-cta>
-            </div>
-          </article>
-        `;
+    <main class="main ${this.location.route.name === "home" ? "home" : "not-home"}"> 
+      <div class="articles">  
+        ${this.location.route.name === "home" ? html`
+          ${this._items.map((item, index) => {
+          return html`
+            <article class="post ${index % 2 === 0 ? "even" : "odd"}">
+            <simple-tooltip for="${item.id}" position="${index % 2 === 0 ? "left" : "right"}"">${item.title}</simple-tooltip>
+            <a href="${item.slug}" class="article-link-icon" id="${item.id}"><simple-icon-button-lite class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
+              <div class="article-wrap">
+                <h3>${item.title}</h3>
+                <div>
+                  <p>${item.description}</p>
+                </div>
+                <simple-cta link="${item.slug}" label="${this.t.readMore}" large></simple-cta>
+              </div>
+            </article>
+          `;
         })}` : ``}
-      
+      </div>
       <article class="${this.location.route.name === "home" ? "home" : "not-home"}">
         ${this.location.route.name !== "home" ? html`
         <site-active-title></site-active-title>
