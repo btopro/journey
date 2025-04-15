@@ -357,7 +357,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
             margin-right: 0;
             margin-left: 0;
           }
-          simple-icon-button-lite.article {
+          article simple-icon-button-lite.article {
             display: none;
           }
           .article-wrap simple-cta {
