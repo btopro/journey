@@ -4,6 +4,7 @@
  */
 import { HAXCMSLitElementTheme, css, unsafeCSS, html, store, autorun, toJS } from "@haxtheweb/haxcms-elements/lib/core/HAXCMSLitElementTheme.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/active-item/site-active-title.js";
+import "@haxtheweb/haxcms-elements/lib/ui-components/magic/site-collection-list.js";
 import "@haxtheweb/simple-cta/simple-cta.js";
 import "@haxtheweb/simple-tooltip/simple-tooltip.js";
 import "@haxtheweb/simple-icon/lib/simple-icon-button-lite.js";
@@ -504,7 +505,8 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         <site-active-title></site-active-title>
         ` : ``}
         <!-- this block and names are required for HAX to edit the content of the page. contentcontainer, slot, and wrapping the slot. -->
-        <div id="contentcontainer"><div id="slot">${this.location && this.location.route.name !== "home" ? html`<slot></slot>` : ``}</div></div>
+        <div id="contentcontainer"><div id="slot">${this.location && this.location.route.name !== "home" ? html`<slot></slot>
+        <site-collection-list responsive-size="lg" published limit="0" sort="order" parent="${this.activeItem.id}"></site-collection-list>}  ` : ``}</div></div>
       </article>
     </main>
     <footer>
