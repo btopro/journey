@@ -105,7 +105,17 @@
         "updated": 1744747902,
         "published": true,
         "hideInMenu": false,
-        "readtime": 1
+        "readtime": 1,
+        "files": [
+          {
+            "path": "/home/bto108a/Documents/git/btopro/journey/files/1c1be13288314f780223ee529f3e85bb-me.jpg",
+            "fullUrl": "//home/bto108a/Documents/git/btopro/journey/files/1c1be13288314f780223ee529f3e85bb-me.jpg",
+            "url": "files/1c1be13288314f780223ee529f3e85bb-me.jpg",
+            "type": "image/jpeg",
+            "name": "1c1be13288314f780223ee529f3e85bb-me.jpg",
+            "size": 41756
+          }
+        ]
       }
     },
     {
