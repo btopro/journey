@@ -111,19 +111,19 @@
     },
     {
       "id": "item-d07e38b5-9765-4914-ba8f-aec78c35d5cf",
-      "indent": 1,
+      "indent": 0,
       "location": "pages/item-d07e38b5-9765-4914-ba8f-aec78c35d5cf/index.html",
       "slug": "page/elms:ln",
       "order": 0,
       "parent": "item-b20298b9-5136-41e3-a492-106db4042e16",
       "title": "ELMS:LN",
-      "description": "",
+      "description": "ELMS: Learning Network was an approach to structuring learning environments where the technology was flexible enough to be remixable on a per-course basis. This allowed for the following, emergent de",
       "metadata": {
         "locked": false,
         "created": 1744745190,
-        "images": [],
-        "videos": [],
-        "updated": 1744745190,
+        "images": {},
+        "videos": {},
+        "updated": 1744745554,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-32-14.png",
@@ -133,7 +133,11 @@
             "name": "Screenshot-from-2025-04-15-15-32-14.png",
             "size": 42656
           }
-        ]
+        ],
+        "published": true,
+        "hideInMenu": false,
+        "image": "files/Screenshot-from-2025-04-15-15-32-14.png",
+        "readtime": 1
       }
     },
     {
