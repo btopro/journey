@@ -142,19 +142,19 @@
     },
     {
       "id": "item-f27e838a-3ee0-4bea-aa50-a59d58213aee",
-      "indent": 1,
+      "indent": 0,
       "location": "pages/item-f27e838a-3ee0-4bea-aa50-a59d58213aee/index.html",
       "slug": "page/information-altruism",
       "order": 1,
       "parent": "item-b20298b9-5136-41e3-a492-106db4042e16",
       "title": "Information Altruism",
-      "description": "",
+      "description": "My (way too long and took forever to write) Masters work research paper. In learning Drupal, building ELMS and then growing that into ELMS:LN, I was able to do a research study associated with the pl",
       "metadata": {
         "locked": false,
         "created": 1744745190,
-        "images": [],
-        "videos": [],
-        "updated": 1744745190,
+        "images": {},
+        "videos": {},
+        "updated": 1744745871,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-37-39.png",
@@ -164,7 +164,11 @@
             "name": "Screenshot-from-2025-04-15-15-37-39.png",
             "size": 48738
           }
-        ]
+        ],
+        "published": true,
+        "hideInMenu": false,
+        "image": "files/Screenshot-from-2025-04-15-15-37-39.png",
+        "readtime": 1
       }
     },
     {
