@@ -102,7 +102,7 @@
         "created": 1744747207,
         "images": {},
         "videos": {},
-        "updated": 1744747902,
+        "updated": 1744748288,
         "published": true,
         "hideInMenu": false,
         "readtime": 1,
@@ -115,7 +115,8 @@
             "name": "1c1be13288314f780223ee529f3e85bb-me.jpg",
             "size": 41756
           }
-        ]
+        ],
+        "image": "files/1c1be13288314f780223ee529f3e85bb-me.jpg"
       }
     },
     {
