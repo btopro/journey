@@ -173,19 +173,19 @@
     },
     {
       "id": "item-04a427d2-6896-4736-bcf1-0bfed0c376da",
-      "indent": 1,
+      "indent": 0,
       "location": "pages/item-04a427d2-6896-4736-bcf1-0bfed0c376da/index.html",
       "slug": "page/hax-the-web",
       "order": 2,
       "parent": "item-b20298b9-5136-41e3-a492-106db4042e16",
       "title": "HAX The Web",
-      "description": "",
+      "description": "Not just the current thing, the forever thing. I can without a doubt say that this is where my work was ultimately to lead; the formation of a sustainable web development community with the goal of r",
       "metadata": {
         "locked": false,
         "created": 1744745190,
-        "images": [],
-        "videos": [],
-        "updated": 1744745190,
+        "images": {},
+        "videos": {},
+        "updated": 1744746136,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-41-54.png",
@@ -195,7 +195,11 @@
             "name": "Screenshot-from-2025-04-15-15-41-54.png",
             "size": 196806
           }
-        ]
+        ],
+        "published": true,
+        "hideInMenu": false,
+        "image": "files/Screenshot-from-2025-04-15-15-41-54.png",
+        "readtime": 1
       }
     },
     {
