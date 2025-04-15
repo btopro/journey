@@ -68,7 +68,7 @@
       "description": "The man, the myth, the legend. I have been called many things, none of them those words. But let's find out more about the guy",
       "metadata": {
         "created": 1744140453,
-        "updated": 1744745190,
+        "updated": 1744747207,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/me.jpg",
@@ -99,7 +99,7 @@
       "description": "I've done some awesome research projects in my time here\n\n\n\n",
       "metadata": {
         "created": 1744142194,
-        "updated": 1744745190,
+        "updated": 1744747207,
         "images": {},
         "videos": {},
         "published": true,
@@ -111,7 +111,7 @@
     },
     {
       "id": "item-d07e38b5-9765-4914-ba8f-aec78c35d5cf",
-      "indent": 0,
+      "indent": 1,
       "location": "pages/item-d07e38b5-9765-4914-ba8f-aec78c35d5cf/index.html",
       "slug": "page/elms:ln",
       "order": 0,
@@ -123,7 +123,7 @@
         "created": 1744745190,
         "images": {},
         "videos": {},
-        "updated": 1744745554,
+        "updated": 1744747207,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-32-14.png",
@@ -137,12 +137,13 @@
         "published": true,
         "hideInMenu": false,
         "image": "files/Screenshot-from-2025-04-15-15-32-14.png",
-        "readtime": 1
+        "readtime": 1,
+        "status": ""
       }
     },
     {
       "id": "item-f27e838a-3ee0-4bea-aa50-a59d58213aee",
-      "indent": 0,
+      "indent": 1,
       "location": "pages/item-f27e838a-3ee0-4bea-aa50-a59d58213aee/index.html",
       "slug": "page/information-altruism",
       "order": 1,
@@ -154,7 +155,7 @@
         "created": 1744745190,
         "images": {},
         "videos": {},
-        "updated": 1744745871,
+        "updated": 1744747207,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-37-39.png",
@@ -168,12 +169,13 @@
         "published": true,
         "hideInMenu": false,
         "image": "files/Screenshot-from-2025-04-15-15-37-39.png",
-        "readtime": 1
+        "readtime": 1,
+        "status": ""
       }
     },
     {
       "id": "item-04a427d2-6896-4736-bcf1-0bfed0c376da",
-      "indent": 0,
+      "indent": 1,
       "location": "pages/item-04a427d2-6896-4736-bcf1-0bfed0c376da/index.html",
       "slug": "page/hax-the-web",
       "order": 2,
@@ -185,7 +187,7 @@
         "created": 1744745190,
         "images": {},
         "videos": {},
-        "updated": 1744746136,
+        "updated": 1744747207,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-41-54.png",
@@ -199,7 +201,8 @@
         "published": true,
         "hideInMenu": false,
         "image": "files/Screenshot-from-2025-04-15-15-41-54.png",
-        "readtime": 1
+        "readtime": 1,
+        "status": ""
       }
     },
     {
@@ -213,7 +216,7 @@
       "description": "I am published in many different journals. Here are just a couple of my more recent works of awesomeness!\n",
       "metadata": {
         "created": 1744142197,
-        "updated": 1744745190,
+        "updated": 1744747207,
         "images": {},
         "videos": {},
         "published": true,
@@ -234,7 +237,7 @@
       "description": "Let's get in touch if you want to talk HAX, hockey or... hmm.. need an H word... Happiness. Boom. That works.\nHAX\nHockey\nHappy\n\n\n\n",
       "metadata": {
         "created": 1744142198,
-        "updated": 1744745190,
+        "updated": 1744747207,
         "images": {},
         "videos": {},
         "published": true,
@@ -242,6 +245,40 @@
         "locked": false,
         "readtime": 1,
         "status": ""
+      }
+    },
+    {
+      "id": "item-9af1c172-08c2-4d74-8b32-67d94648cc63",
+      "indent": 1,
+      "location": "pages/item-9af1c172-08c2-4d74-8b32-67d94648cc63/index.html",
+      "slug": "welcome/teaching",
+      "order": 0,
+      "parent": "item-99c476f9-4a66-4711-90bc-bfcb8a0dc09e",
+      "title": "Teaching",
+      "description": "",
+      "metadata": {
+        "locked": false,
+        "created": 1744747207,
+        "images": [],
+        "videos": [],
+        "updated": 1744747207
+      }
+    },
+    {
+      "id": "item-b3221583-3072-46be-833a-2cca2d0213cd",
+      "indent": 1,
+      "location": "pages/item-b3221583-3072-46be-833a-2cca2d0213cd/index.html",
+      "slug": "welcome/coaching",
+      "order": 1,
+      "parent": "item-99c476f9-4a66-4711-90bc-bfcb8a0dc09e",
+      "title": "Coaching",
+      "description": "",
+      "metadata": {
+        "locked": false,
+        "created": 1744747207,
+        "images": [],
+        "videos": [],
+        "updated": 1744747207
       }
     }
   ]

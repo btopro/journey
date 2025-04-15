@@ -40,8 +40,8 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     super();
     this.HAXCMSThemeSettings.autoScroll = false;
     this._items = [];
-    this.activeId = null;
     this.location = null;
+    this.activeItem = {};
     this.basePath = null;
     this.manifest = {};
     this.t = {
@@ -62,21 +62,20 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         this.licenseLink = LList[this.manifest.license].link;
         this.licenseImage = LList[this.manifest.license].image;
       }
-      this._items = toJS(store.manifest.items);
+      this._items = store.getItemChildren(null);
     });
     autorun(() => {
-      this.activeId = toJS(store.activeId);
+      this.activeItem = toJS(store.activeItem);
     });
     autorun(() => {
       this.location = toJS(store.location);
     });
   }
 
-  // properties to respond to the activeID and list of items
   static get properties() {
     return {
       ...super.properties,
-      activeId: { type: String },
+      activeItem: { type: Object },
       location: { type: String },
       basePath: { type: String },
       _items: { type: Array },
@@ -291,6 +290,26 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           line-height: normal;
           font-family: var(--ddd-font-secondary);
         }
+
+        .child-pages-container {
+          display: block;
+          margin-bottom: var(--ddd-spacing-6);
+        }
+
+        .child-page-link {
+          display: inline-block;
+          margin: var(--ddd-spacing-4);
+        }
+        .child-page-link img {
+          width: var(--ddd-spacing-20);
+          height: var(--ddd-spacing-20);
+          border: 4px solid var(--ddd-primary-8);
+          transition: all 0.3s ease-in-out;
+        }
+        .child-page-link img:hover,
+        .child-page-link:focus-within img {
+          border-radius: 50%;
+        }        
         .odd .article-wrap p {
           margin-right: var(--ddd-spacing-4);
           justify-content: right;
@@ -438,7 +457,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           ${this._items.map((item, index) => {
           return html`
             <simple-tooltip for="${item.id}" position="bottom">${item.title}</simple-tooltip>
-            <a tabindex="-1" href="${item.slug}" class="article-link-icon top ${item.id === this.activeId ? "active" : ""}"><simple-icon-button-lite id="${item.id}" class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
+            <a tabindex="-1" href="${item.slug}" class="article-link-icon top ${item.id === this.activeItem.id || item.id === this.activeItem.parent ? "active" : ""}"><simple-icon-button-lite id="${item.id}" class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
           `;
         })}` : ``}
     </div>
@@ -455,7 +474,17 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
                 <div>
                   <p>${item.description}</p>
                 </div>
-                <simple-cta link="${item.slug}" label="${this.t.readMore}" large></simple-cta>
+                ${store.getItemChildren(item.id).length > 0 ? html`
+                  <div class="child-pages-container">
+                    ${store.getItemChildren(item.id).map((child) => 
+                    html`
+                      <simple-tooltip for="v-${child.id}" position="bottom">${child.title}</simple-tooltip>
+                      <a id="v-${child.id}" href="${child.slug}" class="child-page-link">${child.metadata.image ? html`<img src="${child.metadata.image}" loading="lazy"
+                      decoding="async"
+                      fetchpriority="low" alt="${child.title}"/>` : html`${child.title}`}</a>
+                      `)}
+                  </div>` : ``}
+                <simple-cta link="${item.slug}" label="${this.t.readMore}"></simple-cta>
               </div>
             </article>
           `;
@@ -491,11 +520,15 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
                   target="_blank"
                   href="${this.licenseLink}"
                   rel="noopener noreferrer"
-                  ><img
+                  >
+                  <img
                     loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
                     alt="${this.licenseName} graphic"
                     src="${this.licenseImage}"
-                /></a>
+                  />
+                </a>
               ` : ``}
           </div>
         </a>
