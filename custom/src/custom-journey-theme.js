@@ -8,6 +8,8 @@ import "@haxtheweb/simple-cta/simple-cta.js";
 import "@haxtheweb/simple-tooltip/simple-tooltip.js";
 import "@haxtheweb/simple-icon/lib/simple-icon-button-lite.js";
 import "@haxtheweb/scroll-button/scroll-button.js";
+import { licenseList } from "@haxtheweb/license-element/license-element.js";
+
 /**
  * `CustomJourneyTheme`
  * `CustomJourneyTheme based on HAXCMS theming ecosystem`
@@ -54,9 +56,19 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     }
     autorun(() => {
       this.manifest = toJS(store.manifest);
-      this.activeId = toJS(store.activeId);
-      this.location = toJS(store.location);
+      let LList = new licenseList();
+      if (this.manifest.license && LList[this.manifest.license]) {
+        this.licenseName = LList[this.manifest.license].name;
+        this.licenseLink = LList[this.manifest.license].link;
+        this.licenseImage = LList[this.manifest.license].image;
+      }
       this._items = toJS(store.manifest.items);
+    });
+    autorun(() => {
+      this.activeId = toJS(store.activeId);
+    });
+    autorun(() => {
+      this.location = toJS(store.location);
     });
   }
 
@@ -68,6 +80,9 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       location: { type: String },
       basePath: { type: String },
       _items: { type: Array },
+      licenseName: { type: String },
+      licenseLink: { type: String },
+      licenseImage: { type: String },
     };
   }
 
@@ -153,6 +168,21 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         .author a {
           color: white;
           text-decoration: none;
+        }
+        footer .author a {
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+        footer .author a h1 {
+          font-size: var(--ddd-font-size-m);
+        }
+        footer .author a h2 {
+          font-size: var(--ddd-font-size-s);
+        }
+        footer .author-image {
+          width: 5vw;
+          height: 5vw;
         }
         .author-image {
           border-radius: 50%;
@@ -254,7 +284,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           margin-top: 0;
         }
         .article-wrap p {
-          font-size: var(--ddd-font-size-m);
+          font-size: var(--ddd-font-size-s);
           margin-left: var(--ddd-spacing-4);
           min-width: 200px;
           display: flex;
@@ -276,13 +306,11 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           padding: var(--ddd-spacing-10);
         }
         footer {
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          display: block;
           padding: var(--ddd-spacing-10);
           background-color: var(--ddd-primary-8);
           color: white;
-          height: var(--ddd-spacing-5);
+          min-height: var(--ddd-spacing-5);
         }
 
         main.not-home {
@@ -382,7 +410,10 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this.HAXCMSThemeSettings.autoScroll = false;
-
+    this.HAXCMSThemeSettings.scrollTarget =
+      this.shadowRoot.querySelector("#contentcontainer");
+    globalThis.AbsolutePositionStateManager.requestAvailability().scrollTarget =
+      this.HAXCMSThemeSettings.scrollTarget;
   }
 
   render() {
@@ -439,6 +470,36 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       </article>
     </main>
     <footer>
+      <div class="author">
+        <a href="${this.basePath}">${this.manifest.metadata.author.image ? html`
+          <img 
+            class="author-image" 
+            src="${this.manifest.metadata.author.image}"
+            alt="${this.manifest.metadata.author.name}"
+          />`: ``}
+          <h1>${this.manifest.title}</h1>
+          <h2>${this.manifest.description}</h2>
+          <div
+            class="license-body"
+            xmlns:cc="${this.licenseLink}"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+          >
+          ${this.licenseImage
+            ? html`
+                <a
+                  class="big-license-link"
+                  target="_blank"
+                  href="${this.licenseLink}"
+                  rel="noopener noreferrer"
+                  ><img
+                    loading="lazy"
+                    alt="${this.licenseName} graphic"
+                    src="${this.licenseImage}"
+                /></a>
+              ` : ``}
+          </div>
+        </a>
+      </div>
       <slot name="footer"></slot>
     </footer>
     `;
