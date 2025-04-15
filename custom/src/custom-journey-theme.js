@@ -506,7 +506,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         ` : ``}
         <!-- this block and names are required for HAX to edit the content of the page. contentcontainer, slot, and wrapping the slot. -->
         <div id="contentcontainer"><div id="slot">${this.location && this.location.route.name !== "home" ? html`<slot></slot>
-        <site-collection-list responsive-size="lg" published limit="0" sort="order" parent="${this.activeItem.id}"></site-collection-list>}  ` : ``}</div></div>
+        <site-collection-list published limit="0" sort="order" parent="${this.activeItem.id}"></site-collection-list>` : ``}</div></div>
       </article>
     </main>
     <footer>
