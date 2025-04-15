@@ -245,9 +245,9 @@
     },
     {
       "id": "item-04a427d2-6896-4736-bcf1-0bfed0c376da",
-      "indent": 1,
+      "indent": 0,
       "location": "pages/item-04a427d2-6896-4736-bcf1-0bfed0c376da/index.html",
-      "slug": "page/hax-the-web",
+      "slug": "research/hax-the-web",
       "order": 2,
       "parent": "item-b20298b9-5136-41e3-a492-106db4042e16",
       "title": "HAX The Web",
@@ -257,7 +257,7 @@
         "created": 1744745190,
         "images": {},
         "videos": {},
-        "updated": 1744747207,
+        "updated": 1744748758,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-41-54.png",
