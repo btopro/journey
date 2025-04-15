@@ -90,19 +90,22 @@
     },
     {
       "id": "item-9af1c172-08c2-4d74-8b32-67d94648cc63",
-      "indent": 1,
+      "indent": 0,
       "location": "pages/item-9af1c172-08c2-4d74-8b32-67d94648cc63/index.html",
       "slug": "welcome/teaching",
       "order": 0,
       "parent": "item-99c476f9-4a66-4711-90bc-bfcb8a0dc09e",
       "title": "Teaching",
-      "description": "",
+      "description": "With the right tools, you can build anything\n\n\n",
       "metadata": {
         "locked": false,
         "created": 1744747207,
-        "images": [],
-        "videos": [],
-        "updated": 1744747207
+        "images": {},
+        "videos": {},
+        "updated": 1744747902,
+        "published": true,
+        "hideInMenu": false,
+        "readtime": 1
       }
     },
     {
