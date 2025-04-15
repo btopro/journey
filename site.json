@@ -123,7 +123,17 @@
         "created": 1744745190,
         "images": [],
         "videos": [],
-        "updated": 1744745190
+        "updated": 1744745190,
+        "files": [
+          {
+            "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-32-14.png",
+            "fullUrl": "//home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-32-14.png",
+            "url": "files/Screenshot-from-2025-04-15-15-32-14.png",
+            "type": "image/png",
+            "name": "Screenshot-from-2025-04-15-15-32-14.png",
+            "size": 42656
+          }
+        ]
       }
     },
     {
