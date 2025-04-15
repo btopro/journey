@@ -4,10 +4,13 @@
  */
 import { HAXCMSLitElementTheme, css, unsafeCSS, html, store, autorun, toJS } from "@haxtheweb/haxcms-elements/lib/core/HAXCMSLitElementTheme.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/active-item/site-active-title.js";
+import "@haxtheweb/haxcms-elements/lib/ui-components/magic/site-collection-list.js";
 import "@haxtheweb/simple-cta/simple-cta.js";
 import "@haxtheweb/simple-tooltip/simple-tooltip.js";
 import "@haxtheweb/simple-icon/lib/simple-icon-button-lite.js";
 import "@haxtheweb/scroll-button/scroll-button.js";
+import { licenseList } from "@haxtheweb/license-element/license-element.js";
+
 /**
  * `CustomJourneyTheme`
  * `CustomJourneyTheme based on HAXCMS theming ecosystem`
@@ -38,8 +41,8 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     super();
     this.HAXCMSThemeSettings.autoScroll = false;
     this._items = [];
-    this.activeId = null;
     this.location = null;
+    this.activeItem = {};
     this.basePath = null;
     this.manifest = {};
     this.t = {
@@ -54,20 +57,32 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     }
     autorun(() => {
       this.manifest = toJS(store.manifest);
-      this.activeId = toJS(store.activeId);
+      let LList = new licenseList();
+      if (this.manifest.license && LList[this.manifest.license]) {
+        this.licenseName = LList[this.manifest.license].name;
+        this.licenseLink = LList[this.manifest.license].link;
+        this.licenseImage = LList[this.manifest.license].image;
+      }
+      this._items = store.getItemChildren(null);
+    });
+    autorun(() => {
+      this.activeItem = toJS(store.activeItem);
+    });
+    autorun(() => {
       this.location = toJS(store.location);
-      this._items = toJS(store.manifest.items);
     });
   }
 
-  // properties to respond to the activeID and list of items
   static get properties() {
     return {
       ...super.properties,
-      activeId: { type: String },
+      activeItem: { type: Object },
       location: { type: String },
       basePath: { type: String },
       _items: { type: Array },
+      licenseName: { type: String },
+      licenseLink: { type: String },
+      licenseImage: { type: String },
     };
   }
 
@@ -153,6 +168,21 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         .author a {
           color: white;
           text-decoration: none;
+        }
+        footer .author a {
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+        footer .author a h1 {
+          font-size: var(--ddd-font-size-m);
+        }
+        footer .author a h2 {
+          font-size: var(--ddd-font-size-s);
+        }
+        footer .author-image {
+          width: 5vw;
+          height: 5vw;
         }
         .author-image {
           border-radius: 50%;
@@ -254,13 +284,33 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           margin-top: 0;
         }
         .article-wrap p {
-          font-size: var(--ddd-font-size-m);
+          font-size: var(--ddd-font-size-s);
           margin-left: var(--ddd-spacing-4);
           min-width: 200px;
           display: flex;
           line-height: normal;
           font-family: var(--ddd-font-secondary);
         }
+
+        .child-pages-container {
+          display: block;
+          margin-bottom: var(--ddd-spacing-6);
+        }
+
+        .child-page-link {
+          display: inline-block;
+          margin: var(--ddd-spacing-4);
+        }
+        .child-page-link img {
+          width: var(--ddd-spacing-20);
+          height: var(--ddd-spacing-20);
+          border: 4px solid var(--ddd-primary-8);
+          transition: all 0.3s ease-in-out;
+        }
+        .child-page-link img:hover,
+        .child-page-link:focus-within img {
+          border-radius: 50%;
+        }        
         .odd .article-wrap p {
           margin-right: var(--ddd-spacing-4);
           justify-content: right;
@@ -276,13 +326,11 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           padding: var(--ddd-spacing-10);
         }
         footer {
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          display: block;
           padding: var(--ddd-spacing-10);
           background-color: var(--ddd-primary-8);
           color: white;
-          height: var(--ddd-spacing-5);
+          min-height: var(--ddd-spacing-5);
         }
 
         main.not-home {
@@ -382,7 +430,10 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this.HAXCMSThemeSettings.autoScroll = false;
-
+    this.HAXCMSThemeSettings.scrollTarget =
+      this.shadowRoot.querySelector("#contentcontainer");
+    globalThis.AbsolutePositionStateManager.requestAvailability().scrollTarget =
+      this.HAXCMSThemeSettings.scrollTarget;
   }
 
   render() {
@@ -391,7 +442,10 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       <div class="author">
         <a href="${this.basePath}">${this.manifest.metadata.author.image ? html`
           <img 
-            class="author-image" 
+            class="author-image"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
             src="${this.manifest.metadata.author.image}"
             alt="${this.manifest.metadata.author.name}"
           />`: ``}
@@ -407,7 +461,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           ${this._items.map((item, index) => {
           return html`
             <simple-tooltip for="${item.id}" position="bottom">${item.title}</simple-tooltip>
-            <a tabindex="-1" href="${item.slug}" class="article-link-icon top ${item.id === this.activeId ? "active" : ""}"><simple-icon-button-lite id="${item.id}" class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
+            <a tabindex="-1" href="${item.slug}" class="article-link-icon top ${item.id === this.activeItem.id || item.id === this.activeItem.parent ? "active" : ""}"><simple-icon-button-lite id="${item.id}" class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
           `;
         })}` : ``}
     </div>
@@ -424,7 +478,23 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
                 <div>
                   <p>${item.description}</p>
                 </div>
-                <simple-cta link="${item.slug}" label="${this.t.readMore}" large></simple-cta>
+                ${store.getItemChildren(item.id).length > 0 ? html`
+                  <div class="child-pages-container">
+                    ${store.getItemChildren(item.id).map((child) => 
+                    html`
+                      <simple-tooltip for="v-${child.id}" position="bottom">${child.title}</simple-tooltip>
+                      <a id="v-${child.id}" href="${child.slug}" class="child-page-link">${child.metadata.image ? html`<img src="${child.metadata.image}" loading="lazy"
+                      decoding="async"
+                      fetchpriority="low" alt="${child.title}"/>` : html`<img 
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+            src="${this.manifest.metadata.author.image}"
+            alt="${this.manifest.metadata.author.name}"
+          />`}</a>
+                      `)}
+                  </div>` : ``}
+                <simple-cta link="${item.slug}" label="${this.t.readMore}"></simple-cta>
               </div>
             </article>
           `;
@@ -435,10 +505,48 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         <site-active-title></site-active-title>
         ` : ``}
         <!-- this block and names are required for HAX to edit the content of the page. contentcontainer, slot, and wrapping the slot. -->
-        <div id="contentcontainer"><div id="slot">${this.location && this.location.route.name !== "home" ? html`<slot></slot>` : ``}</div></div>
+        <div id="contentcontainer"><div id="slot">${this.location && this.location.route.name !== "home" ? html`<slot></slot>
+        <site-collection-list published limit="0" sort="order" parent="${this.activeItem.id}"></site-collection-list>` : ``}</div></div>
       </article>
     </main>
     <footer>
+      <div class="author">
+        <a href="${this.basePath}">${this.manifest.metadata.author.image ? html`
+          <img 
+            class="author-image"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+            src="${this.manifest.metadata.author.image}"
+            alt="${this.manifest.metadata.author.name}"
+          />`: ``}
+          <h1>${this.manifest.title}</h1>
+          <h2>${this.manifest.description}</h2>
+          <div
+            class="license-body"
+            xmlns:cc="${this.licenseLink}"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+          >
+          ${this.licenseImage
+            ? html`
+                <a
+                  class="big-license-link"
+                  target="_blank"
+                  href="${this.licenseLink}"
+                  rel="noopener noreferrer"
+                  >
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
+                    alt="${this.licenseName} graphic"
+                    src="${this.licenseImage}"
+                  />
+                </a>
+              ` : ``}
+          </div>
+        </a>
+      </div>
       <slot name="footer"></slot>
     </footer>
     `;
