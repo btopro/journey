@@ -5,6 +5,7 @@
 import { HAXCMSLitElementTheme, css, unsafeCSS, html, store, autorun, toJS } from "@haxtheweb/haxcms-elements/lib/core/HAXCMSLitElementTheme.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/active-item/site-active-title.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/magic/site-collection-list.js";
+import "@haxtheweb/haxcms-elements/lib/ui-components/navigation/site-breadcrumb.js";
 import "@haxtheweb/simple-cta/simple-cta.js";
 import "@haxtheweb/simple-tooltip/simple-tooltip.js";
 import "@haxtheweb/simple-icon/lib/simple-icon-button-lite.js";
@@ -63,7 +64,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         this.licenseLink = LList[this.manifest.license].link;
         this.licenseImage = LList[this.manifest.license].image;
       }
-      this._items = store.getItemChildren(null);
+      this._items = this.getItemChildren(null);
     });
     autorun(() => {
       this.activeItem = toJS(store.activeItem);
@@ -71,6 +72,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     autorun(() => {
       this.location = toJS(store.location);
     });
+  }
+
+  getItemChildren(itemId) {
+    if (this.manifest && this.manifest.items) {
+      return this.manifest.items.filter((item) => item.parent === itemId);
+    }
   }
 
   static get properties() {
@@ -340,6 +347,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         article.home {
           display: none;
         }
+        site-active-title {
+          line-height: normal;
+        }
+        site-breadcrumb {
+          --site-breadcrumb-margin: 0 0 var(--ddd-spacing-4) 0;
+        }
         site-active-title h1 {
           font-size: var(--ddd-font-size-4xl);
           margin-top: 0;
@@ -478,9 +491,9 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
                 <div>
                   <p>${item.description}</p>
                 </div>
-                ${store.getItemChildren(item.id).length > 0 ? html`
+                ${this.getItemChildren(item.id).length > 0 ? html`
                   <div class="child-pages-container">
-                    ${store.getItemChildren(item.id).map((child) => 
+                    ${this.getItemChildren(item.id).map((child) => 
                     html`
                       <simple-tooltip for="v-${child.id}" position="bottom">${child.title}</simple-tooltip>
                       <a id="v-${child.id}" href="${child.slug}" class="child-page-link">${child.metadata.image ? html`<img src="${child.metadata.image}" loading="lazy"
@@ -502,6 +515,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       </div>
       <article class="${this.location && this.location.route.name === "home" ? "home" : "not-home"}">
         ${this.location && this.location.route.name !== "home" ? html`
+        <site-breadcrumb></site-breadcrumb>
         <site-active-title></site-active-title>
         ` : ``}
         <!-- this block and names are required for HAX to edit the content of the page. contentcontainer, slot, and wrapping the slot. -->
