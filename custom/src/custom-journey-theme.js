@@ -441,7 +441,10 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       <div class="author">
         <a href="${this.basePath}">${this.manifest.metadata.author.image ? html`
           <img 
-            class="author-image" 
+            class="author-image"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
             src="${this.manifest.metadata.author.image}"
             alt="${this.manifest.metadata.author.name}"
           />`: ``}
@@ -481,7 +484,13 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
                       <simple-tooltip for="v-${child.id}" position="bottom">${child.title}</simple-tooltip>
                       <a id="v-${child.id}" href="${child.slug}" class="child-page-link">${child.metadata.image ? html`<img src="${child.metadata.image}" loading="lazy"
                       decoding="async"
-                      fetchpriority="low" alt="${child.title}"/>` : html`${child.title}`}</a>
+                      fetchpriority="low" alt="${child.title}"/>` : html`<img 
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+            src="${this.manifest.metadata.author.image}"
+            alt="${this.manifest.metadata.author.name}"
+          />`}</a>
                       `)}
                   </div>` : ``}
                 <simple-cta link="${item.slug}" label="${this.t.readMore}"></simple-cta>
@@ -502,7 +511,10 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       <div class="author">
         <a href="${this.basePath}">${this.manifest.metadata.author.image ? html`
           <img 
-            class="author-image" 
+            class="author-image"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
             src="${this.manifest.metadata.author.image}"
             alt="${this.manifest.metadata.author.name}"
           />`: ``}
