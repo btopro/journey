@@ -61,14 +61,14 @@
       "id": "item-99c476f9-4a66-4711-90bc-bfcb8a0dc09e",
       "indent": 0,
       "location": "pages/item-99c476f9-4a66-4711-90bc-bfcb8a0dc09e/index.html",
-      "slug": "welcome",
+      "slug": "about",
       "order": 0,
       "parent": null,
-      "title": "About me",
+      "title": "About",
       "description": "The man, the myth, the legend. I have been called many things, none of them those words. But let's find out more about the guy",
       "metadata": {
         "created": 1744140453,
-        "updated": 1744748640,
+        "updated": 1744748659,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/me.jpg",
