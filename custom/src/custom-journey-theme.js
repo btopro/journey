@@ -41,6 +41,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
   constructor() {
     super();
     this.HAXCMSThemeSettings.autoScroll = false;
+    this.siteTheme = "";
     this._items = [];
     this.location = null;
     this.activeItem = {};
@@ -178,8 +179,8 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         }
 
         :host([site-theme="sand"]) {
-          --haxcms-site-theme-color-1: var(--ddd-theme-default-shrineTan);
-          --haxcms-site-theme-color-2: var(--ddd-theme-default-roarGolden);          
+          --haxcms-site-theme-color-1: var(--ddd-primary-15);
+          --haxcms-site-theme-color-2: var(--ddd-primary-10);         
         }
 
         header {
@@ -193,9 +194,26 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           overflow: hidden;
           padding: var(--ddd-spacing-10);
           z-index: 1;
+          transition: .3s all ease-in-out;
+        }
+        .theme-picker {
+          z-index: 1;
+          color: var(--haxcms-site-theme-color-2);
+          background-color: var(--haxcms-site-theme-color-1);
+          padding: var(--ddd-spacing-1);
+          --simple-icon-width: var(--ddd-spacing-8);
+          --simple-icon-height: var(--ddd-spacing-8);
+        }
+        header .theme-picker {
+          position: absolute;
+          color: var(--haxcms-site-theme-color-1);
+          background-color: var(--haxcms-site-theme-color-2);
+          right: var(--ddd-spacing-2);
+          top: var(--ddd-spacing-2);
         }
         .lower-header-box {
           background-color: var(--haxcms-site-theme-color-2);
+          transition: .3s all ease-in-out;
           height: var(--ddd-spacing-12);
           padding: var(--ddd-spacing-6);
           display: flex;
@@ -208,27 +226,35 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           color: var(--haxcms-site-theme-low-tone);
           text-decoration: none;
         }
-        footer .author a {
-          color: var(--haxcms-site-theme-high-tone);
+        footer .author .spacing {
           display: flex;
           justify-content: space-evenly;
           align-items: center;
         }
-        footer .author a h1 {
+        footer .author {
+          color: var(--haxcms-site-theme-high-tone);
+        }
+        footer .author h1 {
           font-size: var(--ddd-font-size-m);
         }
-        footer .author a h2 {
+        footer .author h2 {
           font-size: var(--ddd-font-size-s);
-        }
-        footer .author-image {
-          width: 5vw;
-          height: 5vw;
         }
         .author-image {
           border-radius: 50%;
           width: 15vw;
           height: 15vw;
-          border: 4px solid var(--haxcms-site-theme-low-tone);
+          border: 4px solid var(--haxcms-site-theme-color-2)
+        }
+        .author-image:hover,
+        .author-image:focus-within {
+          transition: .3s all ease-in-out;
+          transform: scale(1.1);
+        }
+        footer .author-image {
+          width: 5vw;
+          height: 5vw;
+          border: 4px solid var(--haxcms-site-theme-color-1)
         }
         header h1 {
           font-size: var(--ddd-font-size-4xl);
@@ -260,6 +286,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           --simple-tooltip-duration-in: var(--page-section-tooltip-duration-in, 300);
           --simple-tooltip-duration-out: var(--page-section-tooltip-duration-out, 0);
         }
+        scroll-button {
+          --scroll-button-color: var(--haxcms-site-theme-color-2);
+          --scroll-button-background-color: var(--haxcms-site-theme-color-1);
+          --simple-icon-width: var(--ddd-spacing-8);
+          --simple-icon-height: var(--ddd-spacing-8);
+        }
         .article-link-icon.top {
           color: var(--haxcms-site-theme-color-1);
           margin: 0 var(--ddd-spacing-4);
@@ -284,6 +316,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         }
         .article-link-icon.top  simple-icon-button-lite::part(button) {
           background-color: var(--haxcms-site-theme-color-2);
+          transition: .3s all ease-in-out;
         }
         .article-link-icon.active simple-icon-button-lite.article {
           color: var(--haxcms-site-theme-low-tone);
@@ -382,6 +415,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           background-color: var(--haxcms-site-theme-color-2);
           color: var(--haxcms-site-theme-low-tone);
           min-height: var(--ddd-spacing-5);
+          transition: .3s all ease-in-out;
         }
 
         main.not-home {
@@ -488,14 +522,36 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     super.firstUpdated(changedProperties);
     this.HAXCMSThemeSettings.autoScroll = false;
     this.HAXCMSThemeSettings.scrollTarget =
-      this.shadowRoot.querySelector("#contentcontainer");
+      this.shadowRoot.querySelector(".lower-header-box");
     globalThis.AbsolutePositionStateManager.requestAvailability().scrollTarget =
       this.HAXCMSThemeSettings.scrollTarget;
+    console.log(this.HAXCMSThemeSettings);
+  }
+
+  toggleSiteTheme(e) {
+    switch (this.siteTheme) {
+      case "earth":
+        this.siteTheme = "water";
+      break;
+      case "water":
+        this.siteTheme = "fire";
+      break;
+      case "fire":
+        this.siteTheme = "sand";
+      break;
+      case "sand":
+        this.siteTheme = "";
+      break;
+      default:
+        this.siteTheme = "earth";        
+      break;
+    }
   }
 
   render() {
     return html`
     <header>
+      <simple-icon-button-lite icon="image:style" class="theme-picker" @click="${this.toggleSiteTheme}"></simple-icon-button-lite>
       <div class="author">
         <a href="${this.basePath}">${this.manifest.metadata.author.image ? html`
           <img 
@@ -518,7 +574,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           ${this._items.map((item, index) => {
           return html`
             <simple-tooltip for="${item.id}" position="bottom">${item.title}</simple-tooltip>
-            <a tabindex="-1" href="${item.slug}" class="article-link-icon top ${item.id === this.activeItem.id || item.id === this.activeItem.parent ? "active" : ""}"><simple-icon-button-lite id="${item.id}" class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
+            <a tabindex="-1" href="${item.slug}" class="article-link-icon top ${this.activeItem && (item.id === this.activeItem.id || item.id === this.activeItem.parent) ? "active" : ""}"><simple-icon-button-lite id="${item.id}" class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
           `;
         })}` : ``}
     </div>
@@ -565,12 +621,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         ` : ``}
         <!-- this block and names are required for HAX to edit the content of the page. contentcontainer, slot, and wrapping the slot. -->
         <div id="contentcontainer"><div id="slot">${this.location && this.location.route.name !== "home" ? html`<slot></slot>
-        <site-collection-list published limit="0" sort="order" parent="${this.activeItem.id}"></site-collection-list>` : ``}</div></div>
+        <site-collection-list published limit="0" sort="order" parent="${this.activeItem ? this.activeItem.id : null}"></site-collection-list>` : ``}</div></div>
       </article>
     </main>
     <footer>
       <div class="author">
-        <a href="${this.basePath}">${this.manifest.metadata.author.image ? html`
+        <div class="spacing"><a href="${this.basePath}">${this.manifest.metadata.author.image ? html`
           <img 
             class="author-image"
             loading="lazy"
@@ -579,6 +635,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
             src="${this.manifest.metadata.author.image}"
             alt="${this.manifest.metadata.author.name}"
           />`: ``}
+          </a>
           <h1>${this.manifest.title}</h1>
           <h2>${this.manifest.description}</h2>
           <div
@@ -604,8 +661,10 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
                 </a>
               ` : ``}
           </div>
-        </a>
-      </div>
+          <simple-icon-button-lite icon="image:style" class="theme-picker" @click="${this.toggleSiteTheme}"></simple-icon-button-lite>
+          <scroll-button></scroll-button>
+        </div>
+        </div>
       <slot name="footer"></slot>
     </footer>
     `;
