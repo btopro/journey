@@ -89,6 +89,13 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       }
       body.dark-mode {
         background-color: var(--my-theme-high-tone);
+        color: var(--my-theme-low-tone);
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: var(--my-theme-high-tone);
+          color: var(--my-theme-low-tone);
+        }
       }
       `,
     ];
@@ -192,9 +199,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           height: var(--ddd-spacing-5);
         }
 
-        .not-home {
+        main.not-home {
           background-color: var(--my-theme-low-tone);
-          padding: var(--ddd-spacing-30);
+          padding: var(--ddd-spacing-15) var(--ddd-spacing-30);
+        }
+        article.home {
+          display: none;
         }
         site-active-title h1 {
           font-size: var(--ddd-font-size-4xl);
@@ -232,7 +242,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         `;
         })}` : ``}
       
-      <article>
+      <article class="${this.location.route.name === "home" ? "home" : "not-home"}">
         ${this.location.route.name !== "home" ? html`
         <site-active-title></site-active-title>
         ` : ``}
