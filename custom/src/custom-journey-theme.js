@@ -75,7 +75,12 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
       let location = toJS(store.location);
       if (globalThis.document && globalThis.document.startViewTransition) {
         globalThis.document.startViewTransition(() => {
+          this.shadowRoot.querySelector('.lower-header-box').scrollIntoView();
           this.location = location;
+          this.shadowRoot.querySelector('.lower-header-box').scrollIntoView();
+          setTimeout(() => {
+            this.shadowRoot.querySelector('.lower-header-box').scrollIntoView();
+          }, 10);
         });
       }
       else {
@@ -158,6 +163,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
       super.styles,
       css`
         :host {
+          scroll-behavior: auto;
           display: block;
           padding: var(--ddd-spacing-0);
           margin: var(--ddd-spacing-0);
@@ -429,7 +435,9 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
 
         main.not-home {
           background-color: var(--haxcms-site-theme-low-tone);
-          padding: var(--ddd-spacing-15) var(--ddd-spacing-30);
+          padding: var(--ddd-spacing-15);
+          max-width: 960px;
+          margin: 0 auto;
         }
         article.home {
           display: none;

@@ -36,6 +36,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
   // set defaults or tie into the store
   constructor() {
     super();
+    this.HAXCMSThemeSettings.autoScroll = false;
     this._items = [];
     this.activeId = null;
     this.location = null;
@@ -87,7 +88,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         margin: var(--ddd-spacing-0);
         background-color: var(--my-theme-low-tone);
       }
-      custom-journey-theme:before {
+      custom-journey-theme::before {
         height: 100vh;
         content: "";
         border-left: 4px dashed var(--ddd-primary-8);
@@ -99,7 +100,7 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         z-index: -1;
       }
       @media (max-width: 800px) {
-        custom-journey-theme:before {
+        custom-journey-theme::before {
           display: none;
         }
       }
@@ -143,6 +144,11 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           background-color: var(--ddd-primary-8);
           height: var(--ddd-spacing-12);
           padding: var(--ddd-spacing-6);
+          display: flex;
+          justify-content: center;
+        }
+        .lower-header-box {
+
         }
         .author a {
           color: white;
@@ -184,16 +190,34 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           --simple-tooltip-duration-in: var(--page-section-tooltip-duration-in, 300);
           --simple-tooltip-duration-out: var(--page-section-tooltip-duration-out, 0);
         }
-        .top {
-          left: calc(50% - 22px);
-          position: absolute;
-        }
-        .article-link-icon {
+        .article-link-icon.top {
           color: var(--ddd-primary-2);
+          margin: 0 var(--ddd-spacing-4);
+        }
+        .article-link-icon.top::before {
+          border-top: 4px dashed white;
+          content: "";
+          display: block;
+          width: 80px;
+          position: absolute;
+          margin-top: 22px;
+        }
+        .article-link-icon.top:last-of-type::before {
+          display: none;
+        }
+        .article-link-icon.top  simple-icon-button-lite::part(button) {
+          background-color: var(--ddd-primary-8);
+        }
+        .article-link-icon.active simple-icon-button-lite.article {
+          color: white;
+        }
+        .article-link-icon.active  simple-icon-button-lite::part(button) {
+          background-color: var(--ddd-primary-4);
         }
         a {
           display: block;
         }
+        
         simple-icon-button-lite.article {
           color: var(--ddd-primary-2);
         }
@@ -355,6 +379,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
     ];
   }
 
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    this.HAXCMSThemeSettings.autoScroll = false;
+
+  }
+
   render() {
     return html`
     <header>
@@ -371,17 +401,24 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       </div>
     </header>
     <div class="lower-header-box">
-      <simple-tooltip for="top" position="top">${this.t.home}</simple-tooltip>
-      <a href="${this.basePath}" id="top" class="top article-link-icon"><simple-icon-button-lite label="${this.t.home}" icon="${this.manifest.metadata.icon ? this.manifest.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
+      <simple-tooltip for="top" position="bottom">${this.t.home}</simple-tooltip>
+      <a tabindex="-1" href="${this.basePath}" class="top article-link-icon"><simple-icon-button-lite id="top" label="${this.t.home}" icon="${this.manifest.metadata.icon ? this.manifest.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
+      ${this.location && this.location.route.name !== "home" ? html`
+          ${this._items.map((item, index) => {
+          return html`
+            <simple-tooltip for="${item.id}" position="bottom">${item.title}</simple-tooltip>
+            <a tabindex="-1" href="${item.slug}" class="article-link-icon top ${item.id === this.activeId ? "active" : ""}"><simple-icon-button-lite id="${item.id}" class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
+          `;
+        })}` : ``}
     </div>
-    <main class="main ${this.location.route.name === "home" ? "home" : "not-home"}"> 
+    <main class="main ${this.location && this.location.route.name === "home" ? "home" : "not-home"}"> 
       <div class="articles">  
-        ${this.location.route.name === "home" ? html`
+        ${this.location && this.location.route.name === "home" ? html`
           ${this._items.map((item, index) => {
           return html`
             <article class="post ${index % 2 === 0 ? "even" : "odd"}">
-            <simple-tooltip for="${item.id}" position="${index % 2 === 0 ? "left" : "right"}"">${item.title}</simple-tooltip>
-            <a href="${item.slug}" class="article-link-icon" id="${item.id}"><simple-icon-button-lite class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
+            <simple-tooltip for="v-${item.id}" position="${index % 2 === 0 ? "left" : "right"}"">${item.title}</simple-tooltip>
+            <a tabindex="-1" href="${item.slug}" class="article-link-icon"><simple-icon-button-lite id="v-${item.id}" class="article" icon="${item.metadata.icon ? item.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
               <div class="article-wrap">
                 <h3>${item.title}</h3>
                 <div>
@@ -393,12 +430,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
           `;
         })}` : ``}
       </div>
-      <article class="${this.location.route.name === "home" ? "home" : "not-home"}">
-        ${this.location.route.name !== "home" ? html`
+      <article class="${this.location && this.location.route.name === "home" ? "home" : "not-home"}">
+        ${this.location && this.location.route.name !== "home" ? html`
         <site-active-title></site-active-title>
         ` : ``}
         <!-- this block and names are required for HAX to edit the content of the page. contentcontainer, slot, and wrapping the slot. -->
-        <div id="contentcontainer"><div id="slot">${this.location.route.name !== "home" ? html`<slot></slot>` : ``}</div></div>
+        <div id="contentcontainer"><div id="slot">${this.location && this.location.route.name !== "home" ? html`<slot></slot>` : ``}</div></div>
       </article>
     </main>
     <footer>
