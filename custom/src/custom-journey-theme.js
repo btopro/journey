@@ -244,9 +244,13 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
         }
         footer .author h1 {
           font-size: var(--ddd-font-size-m);
+          margin: 0;
+          padding: 0;
         }
         footer .author h2 {
           font-size: var(--ddd-font-size-s);
+          margin: 0;
+          padding: 0;
         }
         .author-image {
           border-radius: 50%;
