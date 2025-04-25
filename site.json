@@ -332,22 +332,6 @@
         "images": [],
         "videos": []
       }
-    },
-    {
-      "id": "item-e139dfc4-9ea5-4bda-a047-a77892542602",
-      "indent": 0,
-      "location": "pages/item-e139dfc4-9ea5-4bda-a047-a77892542602/index.html",
-      "slug": "page-1",
-      "order": 5,
-      "parent": null,
-      "title": "Page",
-      "description": "",
-      "metadata": {
-        "created": 1745609000,
-        "updated": 1745609000,
-        "images": [],
-        "videos": []
-      }
     }
   ]
 }

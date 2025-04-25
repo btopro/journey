@@ -583,7 +583,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
       this.shadowRoot.querySelector(".lower-header-box");
     globalThis.AbsolutePositionStateManager.requestAvailability().scrollTarget =
       this.HAXCMSThemeSettings.scrollTarget;
-    console.log(this.HAXCMSThemeSettings);
+   // console.log(this.HAXCMSThemeSettings);
   }
 
   toggleSiteTheme(e) {
