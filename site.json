@@ -316,6 +316,22 @@
         "readtime": 1,
         "status": ""
       }
+    },
+    {
+      "id": "item-61069d1f-22ea-4703-9d38-274a4245a7a7",
+      "indent": 0,
+      "location": "pages/item-61069d1f-22ea-4703-9d38-274a4245a7a7/index.html",
+      "slug": "page",
+      "order": 4,
+      "parent": null,
+      "title": "Page",
+      "description": "",
+      "metadata": {
+        "created": 1745608999,
+        "updated": 1745608999,
+        "images": [],
+        "videos": []
+      }
     }
   ]
 }

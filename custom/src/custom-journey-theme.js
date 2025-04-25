@@ -43,6 +43,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
     super();
     this.HAXCMSThemeSettings.autoScroll = false;
     this.siteTheme = "";
+    this.dataPrimary = 2;
     this._items = [];
     this.location = null;
     this.activeItem = {};
@@ -101,6 +102,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
       activeItem: { type: Object },
       location: { type: String },
       basePath: { type: String },
+      dataPrimary: { type: String, attribute: "data-primary", reflect: true },
       _items: { type: Array },
       licenseName: { type: String },
       licenseLink: { type: String },
@@ -120,6 +122,8 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
       :root {
         --haxcms-site-theme-low-tone: white;
         --haxcms-site-theme-high-tone: var(--ddd-theme-default-coalyGray);
+        --color: light-dark(var(--haxcms-site-theme-low-tone), var(--haxcms-site-theme-high-tone));
+        --bg: light-dark(var(--haxcms-site-theme-low-tone), var(--haxcms-site-theme-high-tone));
       }
       body {
         padding: var(--ddd-spacing-0);
@@ -129,7 +133,8 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
       custom-journey-theme::before {
         height: 100vh;
         content: "";
-        border-left: 4px dashed var(--haxcms-site-theme-color-2);
+        transition: var(--haxcms-site-transition);
+        border-left: 8px dashed var(--haxcms-site-theme-color-2);
         position: fixed;
         top: 0;
         bottom: 0;
@@ -145,11 +150,15 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
       body.dark-mode {
         background-color: var(--haxcms-site-theme-high-tone);
         color: var(--haxcms-site-theme-low-tone);
+        --color: light-dark(var(--haxcms-site-theme-low-tone), var(--haxcms-site-theme-high-tone));
+        --bg: light-dark(var(--haxcms-site-theme-low-tone), var(--haxcms-site-theme-high-tone));
       }
       @media (prefers-color-scheme: dark) {
         body {
           background-color: var(--haxcms-site-theme-high-tone);
           color: var(--haxcms-site-theme-low-tone);
+          --color: light-dark(var(--haxcms-site-theme-low-tone), var(--haxcms-site-theme-high-tone));
+          --bg: light-dark(var(--haxcms-site-theme-low-tone), var(--haxcms-site-theme-high-tone));
         }
       }
       `,
@@ -168,27 +177,28 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
           padding: var(--ddd-spacing-0);
           margin: var(--ddd-spacing-0);
           --haxcms-site-theme-color-1: var(--ddd-primary-2);
-          --haxcms-site-theme-color-2: var(--ddd-primary-8);  
+          --haxcms-site-theme-color-2: var(--ddd-primary-8);
+          --haxcms-site-transition: .3s all ease-in-out;
         }
 
         :host([site-theme="earth"]) {
-          --haxcms-site-theme-color-1: var(--ddd-theme-default-opportunityGreen);
-          --haxcms-site-theme-color-2: var(--ddd-theme-default-futureLime);          
+          --haxcms-site-theme-color-1: var(--ddd-primary-17);
+          --haxcms-site-theme-color-2: var(--ddd-primary-18);
         }
 
         :host([site-theme="water"]) {
-          --haxcms-site-theme-color-1: var(--ddd-theme-default-creekTeal);
-          --haxcms-site-theme-color-2: var(--ddd-theme-default-creekLight);          
+          --haxcms-site-theme-color-1: var(--ddd-primary-7);
+          --haxcms-site-theme-color-2: var(--ddd-primary-1);
         }
 
         :host([site-theme="fire"]) {
-          --haxcms-site-theme-color-1: var(--ddd-theme-default-original87Pink);
-          --haxcms-site-theme-color-2: var(--ddd-theme-default-discoveryCoral);          
+          --haxcms-site-theme-color-1: var(--ddd-primary-11);
+          --haxcms-site-theme-color-2: var(--ddd-primary-12);
         }
 
         :host([site-theme="sand"]) {
           --haxcms-site-theme-color-1: var(--ddd-primary-15);
-          --haxcms-site-theme-color-2: var(--ddd-primary-10);         
+          --haxcms-site-theme-color-2: var(--ddd-primary-23);
         }
 
         header {
@@ -202,7 +212,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
           overflow: hidden;
           padding: var(--ddd-spacing-10);
           z-index: 1;
-          transition: .3s all ease-in-out;
+          transition: var(--haxcms-site-transition);
         }
         .theme-picker {
           z-index: 1;
@@ -221,7 +231,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
         }
         .lower-header-box {
           background-color: var(--haxcms-site-theme-color-2);
-          transition: .3s all ease-in-out;
+          transition: var(--haxcms-site-transition);
           height: var(--ddd-spacing-12);
           padding: var(--ddd-spacing-6);
           display: flex;
@@ -240,14 +250,15 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
           align-items: center;
         }
         footer .author {
-          color: var(--haxcms-site-theme-high-tone);
+          --component-color: var(--lowContrast-override, var(--haxcms-site-theme-low-tone));
+          color: var(--component-color);
         }
-        footer .author h1 {
+        footer .author .h1 {
           font-size: var(--ddd-font-size-m);
           margin: 0;
           padding: 0;
         }
-        footer .author h2 {
+        footer .author .h2 {
           font-size: var(--ddd-font-size-s);
           margin: 0;
           padding: 0;
@@ -260,7 +271,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
         }
         .author-image:hover,
         .author-image:focus-within {
-          transition: .3s all ease-in-out;
+          transition: var(--haxcms-site-transition);
           transform: scale(1.1);
         }
         footer .author-image {
@@ -306,16 +317,19 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
         }
         .article-link-icon.top {
           color: var(--haxcms-site-theme-color-1);
-          margin: 0 var(--ddd-spacing-4);
+          margin: 0 var(--ddd-spacing-3);
+          padding-left: 4px;
         }
         .article-link-icon.top:not(.active) simple-icon-button-lite::part(button):hover,
         .article-link-icon.top:not(.active) simple-icon-button-lite::part(button):focus-within {
-          transition: all 0.3s ease-in-out;
+          transition: var(--haxcms-site-transition);
           transform: scale(1.05);
           background-color: white;
           opacity: 1;
         }
+
         .article-link-icon.top::before {
+          transition: var(--haxcms-site-transition);
           border-top: 4px dashed var(--haxcms-site-theme-low-tone);
           content: "";
           display: block;
@@ -328,7 +342,10 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
         }
         .article-link-icon.top  simple-icon-button-lite::part(button) {
           background-color: var(--haxcms-site-theme-color-2);
-          transition: .3s all ease-in-out;
+          transition: var(--haxcms-site-transition);
+        }
+        .home .article-link-icon.top  simple-icon-button-lite::part(button) {
+          background-color: white;
         }
         .article-link-icon.active simple-icon-button-lite.article {
           color: var(--haxcms-site-theme-low-tone);
@@ -400,7 +417,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
           width: var(--ddd-spacing-20);
           height: var(--ddd-spacing-20);
           border: 4px solid var(--haxcms-site-theme-color-2);
-          transition: all 0.3s ease-in-out;
+          transition: var(--haxcms-site-transition);
         }
         .child-page-link img:hover,
         .child-page-link:focus-within img {
@@ -434,11 +451,16 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
           background-color: var(--haxcms-site-theme-color-2);
           color: var(--haxcms-site-theme-low-tone);
           min-height: var(--ddd-spacing-5);
-          transition: .3s all ease-in-out;
+          transition: var(--haxcms-site-transition);
+        }
+
+        site-collection-list {
+          max-width: 70vw;
+          margin: 0 auto;
         }
 
         main.not-home {
-          background-color: var(--haxcms-site-theme-low-tone);
+          background-color: var(--bg);
           padding: var(--ddd-spacing-15);
           max-width: 960px;
           margin: 0 auto;
@@ -446,15 +468,24 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
         article.home {
           display: none;
         }
+        .home simple-icon-button-lite::part(button):hover,
+        .home simple-icon-button-lite::part(button):focus-within {
+          transition: var(--haxcms-site-transition);
+          transform: scale(1.05);
+          background-color: white;
+          opacity: 1;
+        }
         site-active-title {
           line-height: normal;
         }
         site-breadcrumb {
-          --site-breadcrumb-margin: 0 0 var(--ddd-spacing-4) 0;
+          display: flex;
+          min-height: 20px;
+          --site-breadcrumb-margin: 0 0 var(--ddd-spacing-1) 2px;
         }
         site-active-title h1 {
           font-size: var(--ddd-font-size-4xl);
-          margin-top: 0;
+          margin: 0;
         }
         main.home .articles article:last-of-type {
           border-bottom: none;
@@ -534,6 +565,12 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
             max-width: unset;
             font-size: var(--ddd-font-size-s);
           }
+          footer .author .h1 {
+            display: none;
+          }
+          footer .author .h2 {
+            display: none;
+          }
         } 
       `,
     ];
@@ -551,20 +588,31 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
 
   toggleSiteTheme(e) {
     switch (this.siteTheme) {
+      // make this the captain planet powers
+      // earth
+      // wind
+      // fire
+      // water
+      // heart???????
       case "earth":
         this.siteTheme = "water";
+        this.dataPrimary = 1;
       break;
       case "water":
         this.siteTheme = "fire";
+        this.dataPrimary = 11;
       break;
       case "fire":
         this.siteTheme = "sand";
+        this.dataPrimary = 23;
       break;
       case "sand":
         this.siteTheme = "";
+        this.dataPrimary = 2;
       break;
       default:
-        this.siteTheme = "earth";        
+        this.siteTheme = "earth";
+        this.dataPrimary = 1;
       break;
     }
   }
@@ -588,7 +636,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
         </a>
       </div>
     </header>
-    <div class="lower-header-box">
+    <div class="lower-header-box ${this.location && this.location.route.name === "home" ? "home" : "not-home"}"">
       <simple-tooltip for="top" position="bottom">${this.t.home}</simple-tooltip>
       <a tabindex="-1" href="${this.basePath}" class="top article-link-icon"><simple-icon-button-lite id="top" label="${this.t.home}" icon="${this.manifest.metadata.icon ? this.manifest.metadata.icon : "av:album"}"></simple-icon-button-lite></a>
       ${this.location && this.location.route.name !== "home" ? html`
@@ -600,7 +648,7 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
         })}` : ``}
     </div>
     <main class="main ${this.location && this.location.route.name === "home" ? "home" : "not-home"}"> 
-      <div class="articles">  
+      <div class="articles">
         ${this.location && this.location.route.name === "home" ? html`
           ${this._items.map((item, index) => {
           return html`
@@ -657,8 +705,8 @@ class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
             alt="${this.manifest.metadata.author.name}"
           />`: ``}
           </a>
-          <h1>${this.manifest.title}</h1>
-          <h2>${this.manifest.description}</h2>
+          <div class="h1">${this.manifest.title}</div>
+          <div class="h2">${this.manifest.description}</div class="h2">
           <div
             class="license-body"
             xmlns:cc="${this.licenseLink}"
