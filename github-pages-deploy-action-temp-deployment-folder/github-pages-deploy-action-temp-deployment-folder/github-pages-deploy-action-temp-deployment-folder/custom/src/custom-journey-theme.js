@@ -7,6 +7,7 @@ import "@haxtheweb/haxcms-elements/lib/ui-components/active-item/site-active-tit
 import "@haxtheweb/haxcms-elements/lib/ui-components/magic/site-collection-list.js";
 import "@haxtheweb/haxcms-elements/lib/ui-components/navigation/site-breadcrumb.js";
 import "@haxtheweb/simple-cta/simple-cta.js";
+import { DDDAllStyles } from "@haxtheweb/d-d-d/lib/DDDStyles.js";
 import "@haxtheweb/simple-tooltip/simple-tooltip.js";
 import "@haxtheweb/simple-icon/lib/simple-icon-button-lite.js";
 import "@haxtheweb/scroll-button/scroll-button.js";
@@ -28,7 +29,7 @@ import { licenseList } from "@haxtheweb/license-element/license-element.js";
  *  - Data Store - https://haxtheweb.org/documentation/developers/haxsite/data-store
  * @element custom-journey-theme
  */
-class CustomJourneyTheme extends HAXCMSLitElementTheme {
+class CustomJourneyTheme extends (HAXCMSLitElementTheme) {
   /**
    * Store the tag name to make it easier to obtain directly.
    * @notice function name must be here for tooling to operate correctly
@@ -74,7 +75,12 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
       let location = toJS(store.location);
       if (globalThis.document && globalThis.document.startViewTransition) {
         globalThis.document.startViewTransition(() => {
+          this.shadowRoot.querySelector('.lower-header-box').scrollIntoView();
           this.location = location;
+          this.shadowRoot.querySelector('.lower-header-box').scrollIntoView();
+          setTimeout(() => {
+            this.shadowRoot.querySelector('.lower-header-box').scrollIntoView();
+          }, 10);
         });
       }
       else {
@@ -153,9 +159,11 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
   //styles function
   static get styles() {
     return [
+      DDDAllStyles,
       super.styles,
       css`
         :host {
+          scroll-behavior: auto;
           display: block;
           padding: var(--ddd-spacing-0);
           margin: var(--ddd-spacing-0);
@@ -405,6 +413,13 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
         }
         .article-wrap simple-cta {
           margin-top: var(--ddd-spacing-4);
+          --component-background-color: var(--haxcms-site-theme-color-2);
+          --component-color: var(--lowContrast-override, var(--haxcms-site-theme-low-tone));
+        }
+        .article-wrap simple-cta:hover,
+        .article-wrap simple-cta:focus-visible {
+          --component-color: var(--lowContrast-override, var(--haxcms-site-theme-low-tone));
+          --component-background-color: var(--haxcms-site-theme-color-1);
         }
         main {
           padding: var(--ddd-spacing-10);
@@ -420,7 +435,9 @@ class CustomJourneyTheme extends HAXCMSLitElementTheme {
 
         main.not-home {
           background-color: var(--haxcms-site-theme-low-tone);
-          padding: var(--ddd-spacing-15) var(--ddd-spacing-30);
+          padding: var(--ddd-spacing-15);
+          max-width: 960px;
+          margin: 0 auto;
         }
         article.home {
           display: none;

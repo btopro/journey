@@ -17,13 +17,13 @@
       "settings": {
         "lang": "en-US",
         "publishPagesOn": true,
-        "pathauto": false,
+        "pathauto": true,
         "sw": false,
         "forceUpgrade": false,
         "gaID": null
       },
       "created": 1744140453,
-      "updated": 1744142412,
+      "updated": 1744748628,
       "git": {
         "vendor": "github",
         "branch": "gh-pages"
@@ -61,14 +61,14 @@
       "id": "item-99c476f9-4a66-4711-90bc-bfcb8a0dc09e",
       "indent": 0,
       "location": "pages/item-99c476f9-4a66-4711-90bc-bfcb8a0dc09e/index.html",
-      "slug": "welcome",
+      "slug": "about",
       "order": 0,
       "parent": null,
       "title": "About",
       "description": "The man, the myth, the legend. I have been called many things, none of them those words. But let's find out more about the guy",
       "metadata": {
         "created": 1744140453,
-        "updated": 1744143744,
+        "updated": 1744748659,
         "files": [
           {
             "path": "/home/bto108a/Documents/git/btopro/journey/files/me.jpg",
@@ -84,67 +84,237 @@
         "locked": false,
         "readtime": 1,
         "videos": {},
-        "images": {}
+        "images": {},
+        "status": ""
+      }
+    },
+    {
+      "id": "item-9af1c172-08c2-4d74-8b32-67d94648cc63",
+      "indent": 0,
+      "location": "pages/item-9af1c172-08c2-4d74-8b32-67d94648cc63/index.html",
+      "slug": "about/teaching",
+      "order": 0,
+      "parent": "item-99c476f9-4a66-4711-90bc-bfcb8a0dc09e",
+      "title": "Teaching",
+      "description": "With the right tools, you can build anything\n\n\n",
+      "metadata": {
+        "locked": false,
+        "created": 1744747207,
+        "images": {},
+        "videos": {},
+        "updated": 1744748670,
+        "published": true,
+        "hideInMenu": false,
+        "readtime": 1,
+        "files": [
+          {
+            "path": "/home/bto108a/Documents/git/btopro/journey/files/1c1be13288314f780223ee529f3e85bb-me.jpg",
+            "fullUrl": "//home/bto108a/Documents/git/btopro/journey/files/1c1be13288314f780223ee529f3e85bb-me.jpg",
+            "url": "files/1c1be13288314f780223ee529f3e85bb-me.jpg",
+            "type": "image/jpeg",
+            "name": "1c1be13288314f780223ee529f3e85bb-me.jpg",
+            "size": 41756
+          }
+        ],
+        "image": "files/1c1be13288314f780223ee529f3e85bb-me.jpg"
+      }
+    },
+    {
+      "id": "item-b3221583-3072-46be-833a-2cca2d0213cd",
+      "indent": 0,
+      "location": "pages/item-b3221583-3072-46be-833a-2cca2d0213cd/index.html",
+      "slug": "about/coaching",
+      "order": 1,
+      "parent": "item-99c476f9-4a66-4711-90bc-bfcb8a0dc09e",
+      "title": "Coaching",
+      "description": "Fun home tournament win captured on video in 2023\n\n\n",
+      "metadata": {
+        "locked": false,
+        "created": 1744747207,
+        "images": {},
+        "videos": {},
+        "updated": 1744748681,
+        "published": true,
+        "hideInMenu": false,
+        "readtime": 1,
+        "files": [
+          {
+            "path": "/home/bto108a/Documents/git/btopro/journey/files/7912617843158535788.jpg.jpeg",
+            "fullUrl": "//home/bto108a/Documents/git/btopro/journey/files/7912617843158535788.jpg.jpeg",
+            "url": "files/7912617843158535788.jpg.jpeg",
+            "type": "image/jpeg",
+            "name": "7912617843158535788.jpg.jpeg",
+            "size": 423725
+          },
+          {
+            "path": "/home/bto108a/Documents/git/btopro/journey/files/468977781_10134912541433994_3911419685983957379_n.jpg",
+            "fullUrl": "//home/bto108a/Documents/git/btopro/journey/files/468977781_10134912541433994_3911419685983957379_n.jpg",
+            "url": "files/468977781_10134912541433994_3911419685983957379_n.jpg",
+            "type": "image/jpeg",
+            "name": "468977781_10134912541433994_3911419685983957379_n.jpg",
+            "size": 1419966
+          }
+        ],
+        "image": "files/468977781_10134912541433994_3911419685983957379_n.jpg"
       }
     },
     {
       "id": "item-b20298b9-5136-41e3-a492-106db4042e16",
       "indent": 0,
       "location": "pages/item-b20298b9-5136-41e3-a492-106db4042e16/index.html",
-      "slug": "page",
+      "slug": "research",
       "order": 1,
       "parent": null,
       "title": "Research",
       "description": "I've done some awesome research projects in my time here\n\n\n\n",
       "metadata": {
         "created": 1744142194,
-        "updated": 1744143702,
+        "updated": 1744748715,
         "images": {},
         "videos": {},
         "published": true,
         "hideInMenu": false,
         "locked": false,
-        "readtime": 1
+        "readtime": 1,
+        "status": ""
+      }
+    },
+    {
+      "id": "item-d07e38b5-9765-4914-ba8f-aec78c35d5cf",
+      "indent": 0,
+      "location": "pages/item-d07e38b5-9765-4914-ba8f-aec78c35d5cf/index.html",
+      "slug": "research/elmsln",
+      "order": 0,
+      "parent": "item-b20298b9-5136-41e3-a492-106db4042e16",
+      "title": "ELMS:LN",
+      "description": "ELMS: Learning Network was an approach to structuring learning environments where the technology was flexible enough to be remixable on a per-course basis. This allowed for the following, emergent de",
+      "metadata": {
+        "locked": false,
+        "created": 1744745190,
+        "images": {},
+        "videos": {},
+        "updated": 1744748735,
+        "files": [
+          {
+            "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-32-14.png",
+            "fullUrl": "//home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-32-14.png",
+            "url": "files/Screenshot-from-2025-04-15-15-32-14.png",
+            "type": "image/png",
+            "name": "Screenshot-from-2025-04-15-15-32-14.png",
+            "size": 42656
+          }
+        ],
+        "published": true,
+        "hideInMenu": false,
+        "image": "files/Screenshot-from-2025-04-15-15-32-14.png",
+        "readtime": 1,
+        "status": ""
+      }
+    },
+    {
+      "id": "item-f27e838a-3ee0-4bea-aa50-a59d58213aee",
+      "indent": 0,
+      "location": "pages/item-f27e838a-3ee0-4bea-aa50-a59d58213aee/index.html",
+      "slug": "research/information-altruism",
+      "order": 1,
+      "parent": "item-b20298b9-5136-41e3-a492-106db4042e16",
+      "title": "Information Altruism",
+      "description": "My (way too long and took forever to write) Masters work research paper. In learning Drupal, building ELMS and then growing that into ELMS:LN, I was able to do a research study associated with the pl",
+      "metadata": {
+        "locked": false,
+        "created": 1744745190,
+        "images": {},
+        "videos": {},
+        "updated": 1744748745,
+        "files": [
+          {
+            "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-37-39.png",
+            "fullUrl": "//home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-37-39.png",
+            "url": "files/Screenshot-from-2025-04-15-15-37-39.png",
+            "type": "image/png",
+            "name": "Screenshot-from-2025-04-15-15-37-39.png",
+            "size": 48738
+          }
+        ],
+        "published": true,
+        "hideInMenu": false,
+        "image": "files/Screenshot-from-2025-04-15-15-37-39.png",
+        "readtime": 1,
+        "status": ""
+      }
+    },
+    {
+      "id": "item-04a427d2-6896-4736-bcf1-0bfed0c376da",
+      "indent": 0,
+      "location": "pages/item-04a427d2-6896-4736-bcf1-0bfed0c376da/index.html",
+      "slug": "research/hax-the-web",
+      "order": 2,
+      "parent": "item-b20298b9-5136-41e3-a492-106db4042e16",
+      "title": "HAX The Web",
+      "description": "Not just the current thing, the forever thing. I can without a doubt say that this is where my work was ultimately to lead; the formation of a sustainable web development community with the goal of r",
+      "metadata": {
+        "locked": false,
+        "created": 1744745190,
+        "images": {},
+        "videos": {},
+        "updated": 1744748758,
+        "files": [
+          {
+            "path": "/home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-41-54.png",
+            "fullUrl": "//home/bto108a/Documents/git/btopro/journey/files/Screenshot-from-2025-04-15-15-41-54.png",
+            "url": "files/Screenshot-from-2025-04-15-15-41-54.png",
+            "type": "image/png",
+            "name": "Screenshot-from-2025-04-15-15-41-54.png",
+            "size": 196806
+          }
+        ],
+        "published": true,
+        "hideInMenu": false,
+        "image": "files/Screenshot-from-2025-04-15-15-41-54.png",
+        "readtime": 1,
+        "status": ""
       }
     },
     {
       "id": "item-b2ce7062-61d0-4ed9-8802-44351f9cdd80",
       "indent": 0,
       "location": "pages/item-b2ce7062-61d0-4ed9-8802-44351f9cdd80/index.html",
-      "slug": "page-1",
+      "slug": "publications",
       "order": 2,
       "parent": null,
       "title": "Publications",
-      "description": "I am published in many different journals. Here are just a couple of my more recent works of awesomeness!\n",
+      "description": "I am published=",
       "metadata": {
         "created": 1744142197,
-        "updated": 1744143775,
+        "updated": 1744748979,
         "images": {},
         "videos": {},
-        "published": true,
+        "published": false,
         "hideInMenu": false,
         "locked": false,
-        "readtime": 1
+        "readtime": 1,
+        "status": ""
       }
     },
     {
       "id": "item-c08eb346-788f-4ac9-b7f7-d769a8fb4814",
       "indent": 0,
       "location": "pages/item-c08eb346-788f-4ac9-b7f7-d769a8fb4814/index.html",
-      "slug": "page-2",
+      "slug": "contact",
       "order": 3,
       "parent": null,
       "title": "Contact me",
       "description": "Let's get in touch if you want to talk HAX, hockey or... hmm.. need an H word... Happiness. Boom. That works.\nHAX\nHockey\nHappy\n\n\n\n",
       "metadata": {
         "created": 1744142198,
-        "updated": 1744318091,
+        "updated": 1744748768,
         "images": {},
         "videos": {},
         "published": true,
         "hideInMenu": false,
         "locked": false,
-        "readtime": 1
+        "readtime": 1,
+        "status": ""
       }
     }
   ]
